@@ -10,6 +10,10 @@ using namespace std;
 
 int main() {
 
+    Plat pizza("ss", 5.25, 3.5);
+    Menu menuMidi("polyFood.txt", Midi);
+    cout<<endl<<menuMidi.getNbPlats()<<endl;
+    menuMidi.afficher();
 	//creation du restaurant - avec le fichier donne - le nom : PolyFood - moment de la journee : soir. 
 
 	//creer plusieurs clients -- des entiers 
@@ -32,14 +36,14 @@ int main() {
 	
 
 	//afficher le restaurant
-	poly.afficher(); 
+	//poly.afficher();
 
 	cout << "-------------------------------------------------" << endl; 
 
 	//liberer les tables 
 
 	//afficher le restaurant 
-	poly.afficher(); 
+	//poly.afficher();
 	return 0;
 
 }
