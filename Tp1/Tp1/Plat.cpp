@@ -13,6 +13,8 @@ Plat::Plat(string nom, double prix, double cout){
     
 }
 
+Plat::~Plat(){}
+
 string Plat::getNom() const {
         return nom_;
 }
@@ -34,5 +36,5 @@ void Plat::setPrix(double prix) {
 }
 
 void Plat::afficher() const {
-        cout << nom_ << " - " << prix_ << "$ (" << cout_ << "$ pour le restaurant)" << endl;
+        cout <<"\t\t"<< nom_ << " - " << prix_ << "$ (" << cout_ << "$ pour le restaurant)" << endl;
 }

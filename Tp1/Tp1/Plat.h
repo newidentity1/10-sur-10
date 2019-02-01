@@ -18,6 +18,9 @@ public:
 	Plat(); 
 	Plat(string nom, double prix, double cout);
 
+    // destructeur
+    ~Plat();
+    
 	//getters 
 	string getNom() const;
 	double getPrix() const;

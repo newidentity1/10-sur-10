@@ -14,23 +14,26 @@ public:
 	//constructeurs 
 	Table(); 
 	Table(int id, int nbPlaces);
+    
+    //destructeur
+    ~Table();
 
 	//getters 
-	int getId(); 
-	int getNbPlaces(); 
-	bool estOccupee(); 
+	int getId() const;
+	int getNbPlaces() const;
+	bool estOccupee() const;
 
 	//setters 
-	void libererTable(); 
-	void placerClient(); 
-	void setId(int id); 
+	void libererTable();
+	void placerClient();
+	void setId(int id) ;
 
 	//autres methodes 
 	void commander(Plat* plat); 
-	double getChiffreAffaire(); 
+	double getChiffreAffaire() const;
 
 	//affichage
-	void afficher(); 
+	void afficher() const; 
 private : 
 	Plat** commande_; 
 	unsigned int capacite_; 

@@ -15,23 +15,26 @@ Menu::Menu(const string& fichier, TypeMenu type ) {
     lireMenu(fichier);
     
 }
-//(*************ajouter un destructor!!!!!*******
+
 Menu::~Menu() {
-    delete [] listePlats_;
+    for (unsigned i=0; i<nbPlats_; i++){
+        delete listePlats_[i];
+    }
+        delete [] listePlats_;
+        listePlats_ = nullptr;
     
 }
-int Menu::getNbPlats() {
+
+int Menu::getNbPlats() const{
     return nbPlats_;
 }
 
-Plat* Menu::trouverPlat(string& nom) {
+Plat* Menu::trouverPlat(const string& nom) const {
     
-    if (nbPlats_ != 0){
         for(unsigned i =0; i < nbPlats_ ; i++) {
             if (listePlats_[i]->getNom() == nom)
                 return listePlats_[i];
         }
-    }
     return nullptr;
 }
 
@@ -46,7 +49,6 @@ void Menu::ajouterPlat(Plat& plat) {
         
         for (unsigned i=0; i < nbPlats_; i++) {
             nouveauTableau[i] = listePlats_[i];
-            
         }
         delete [] listePlats_;
         listePlats_= nouveauTableau;
@@ -57,8 +59,7 @@ void Menu::ajouterPlat(Plat& plat) {
     }
 }
 
-
-void Menu::ajouterPlat(string& nom, double montant, double cout) {
+void Menu::ajouterPlat(const string& nom, double montant, double cout) {
     
     Plat* nouveauPlat = new Plat(nom, montant, cout);
     ajouterPlat(*nouveauPlat);
@@ -97,10 +98,9 @@ bool Menu::lireMenu(const string& fichier) {
     }
 }
 
-void Menu::afficher() {
+void Menu::afficher() const {
     static const string typeMenu[3] = {"Matin", "Midi", "SOIR"};
-    cout << "-Voici le menu :\n";
-    cout << typeMenu[type_] << " -" << endl;
+    cout << typeMenu[type_] << " :" << endl;
     
     for (unsigned i=0; i < nbPlats_; i++) {
         listePlats_[i]->afficher();

@@ -11,7 +11,8 @@
 Table::Table() {
     capacite_ = MAXCAP;
     id_ = -1;
-    nbPlats_ = 1;
+    nbPlaces_ = 1;
+    nbPlats_ = 0;
     occupee_ = false;
     commande_ = new Plat*[capacite_];
     
@@ -19,35 +20,47 @@ Table::Table() {
 
 Table::Table(int id, int nbPlaces){
     id_ = id;
-    nbPlats_ = nbPlaces;
-    capacite_ = MAXCAP;
+    nbPlats_ = 0;
+    nbPlaces_ = nbPlaces;
+    capacite_ = nbPlaces_;
     occupee_ = false;
     commande_ = new Plat*[capacite_];
     
 }
 
-int Table::getId(){
+Table::~Table(){
+    if (commande_ != nullptr){
+        for (unsigned i=0; i<nbPlats_; i++){
+            delete commande_[i];
+        }
+    
+    delete [] commande_;
+    commande_ = nullptr;
+    }
+}
+
+int Table::getId() const {
     return id_;
 }
 
-int Table::getNbPlaces(){
-    return nbPlats_;
+int Table::getNbPlaces() const {
+    return nbPlaces_;
 }
 
-bool Table::estOccupee(){
+bool Table::estOccupee() const {
     return occupee_;
     
 }
 
-void Table::libererTable(){
-    occupee_ = true;
+void Table::libererTable() {
+    occupee_ = false;
     delete [] commande_;
+    commande_ = nullptr;
     
 }
 
-void Table::placerClient(){
+void Table::placerClient() {
     occupee_ = true;
-    
 }
 
 void Table::setId(int id){
@@ -66,7 +79,7 @@ void Table::commander(Plat* plat){
         
         for (unsigned i=0; i < nbPlats_; i++) {
             nouveauTableau[i] = commande_[i];
-            
+    
         }
         delete [] commande_;
         commande_= nouveauTableau;
@@ -77,7 +90,7 @@ void Table::commander(Plat* plat){
     }
 }
 
-double Table::getChiffreAffaire(){
+double Table::getChiffreAffaire() const {
     double chiffreAffaire = 0.0;
     
     for (unsigned i=0; i< nbPlats_; i++){
@@ -86,8 +99,20 @@ double Table::getChiffreAffaire(){
     return chiffreAffaire;
 }
 
-void Table::afficher(){ //à revoir!!!
-    cout << "Voici les tables ";
-    cout << "La table numéro" << id_;
-    
+void Table::afficher() const {
+   
+    if(occupee_){
+            cout <<"\t\tLa table numéro " << id_ <<" est occupee.";
+        if(nbPlats_ == 0){
+            cout<< " Mais ils n'ont rien commander pour l'instant."<<endl;
+        }else{
+            cout<< " Voici la commande passe par les clients :"<<endl;
+        
+            for (unsigned i=0; i< nbPlats_; i++){
+                commande_[i]->afficher();
+            }
+        }
+    }else {
+        cout<<"\t\tLa table numéro " << id_ << " est libre." << endl;
+    }
 }
