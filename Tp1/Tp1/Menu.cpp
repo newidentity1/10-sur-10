@@ -2,12 +2,12 @@
 
 Menu::Menu() {
     capacite_ = MAXPLAT;
-    listePlats_ = nullptr;
+    listePlats_ = new Plat* [capacite_];
     nbPlats_ = 0;
     type_ = Matin;
 }
 
-Menu::Menu(string fichier, TypeMenu type ) {
+Menu::Menu(const string& fichier, TypeMenu type ) {
     capacite_ = MAXPLAT;
     type_ = type;
     listePlats_ = new Plat* [capacite_];
@@ -65,7 +65,7 @@ void Menu::ajouterPlat(string& nom, double montant, double cout) {
     
 }
 
-bool Menu::lireMenu(string& fichier) {
+bool Menu::lireMenu(const string& fichier) {
     ifstream fichierPlats(fichier);
     if (fichierPlats.fail()) {
         
@@ -75,16 +75,17 @@ bool Menu::lireMenu(string& fichier) {
     }else {
         while (!ws(fichierPlats).eof()) {
             
-            string plats;
-            fichierPlats >> plats;
+            string motLu="";
+            fichierPlats >> motLu;
+
             static const string enteteFichierTexte[4] = {"-MATIN", "-MIDI", "-SOIR", "-TABLES"};
-            if (enteteFichierTexte[type_] == plats){
+            if (enteteFichierTexte[type_] == motLu){
                 while(true){
                     string nom;
                     double prix,coutResto;
                     fichierPlats >> nom >> prix >> coutResto;
                     
-                    if(nom == "-MATIN" || nom == "-MIDI" || nom == "-SOIR" || nom == "-TABLES")
+                    if(nom == "-MIDI" || nom == "-SOIR" || nom == "-TABLES")
                         return true;
                     ajouterPlat(nom, prix, coutResto);
                 }

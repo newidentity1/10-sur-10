@@ -10,8 +10,11 @@ using namespace std;
 
 int main() {
 
-    Plat pizza("ss", 5.25, 3.5);
-    Menu menuMidi("polyFood.txt", Midi);
+    //Plat pizza("ss", 5.25, 3.5);
+    //Menu menuRandom;
+    //menuRandom.ajouterPlat(pizza);
+    string nomFichier = "polyFood.txt";
+    Menu menuMidi(nomFichier, Soir);
     cout<<endl<<menuMidi.getNbPlats()<<endl;
     menuMidi.afficher();
 	//creation du restaurant - avec le fichier donne - le nom : PolyFood - moment de la journee : soir. 
