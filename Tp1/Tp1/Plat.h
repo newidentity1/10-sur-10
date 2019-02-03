@@ -1,7 +1,7 @@
 /*
 * Titre : Plat.h - Travail Pratique #1
-* Date : 09 Janvier 2019
-* Auteur : David Dratwa
+* Date : 01 Fevrier 2019
+* Auteur : Yanis Toubal et Estefan Vega Calcada
 */
 
 #ifndef PLAT_H
@@ -12,7 +12,8 @@
 
 using namespace std; 
 
-class Plat {
+class Plat
+{
 public: 
 	// constructeurs
 	Plat(); 
@@ -37,7 +38,6 @@ private:
 	string nom_; 
 	double prix_; 
 	double cout_; 
-
 };
 
 #endif // !PLAT_H

@@ -1,7 +1,7 @@
 /*
 * Titre : Menu.h - Travail Pratique #1
-* Date : 09 Janvier 2019
-* Auteur : David Dratwa
+* Date : 01 Fevrier 2019
+* Auteur : Yanis Toubal et Estefan Vega Calcada
 */
 
 #ifndef MENU_H
@@ -11,8 +11,11 @@
 #include <fstream>
 
 enum TypeMenu{Matin, Midi, Soir};
+const string CHOISIR_TYPE_MENU[3] = {"-MATIN", "-MIDI", "-SOIR"};
 const int MAXPLAT = 5;
-class Menu {
+
+class Menu
+{
 public: 
 	// constructeurs
 	Menu(); 
@@ -20,7 +23,6 @@ public:
     
     // destructeurs
     ~Menu();
-
 
 	//getters
 	int getNbPlats() const;
@@ -38,8 +40,7 @@ private :
 	unsigned int capacite_;
 	Plat** listePlats_;  
 	unsigned int nbPlats_; 
-	TypeMenu type_; 
-
+	TypeMenu type_;
 };
 
 #endif // !MENU_H

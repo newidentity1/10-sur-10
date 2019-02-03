@@ -1,7 +1,7 @@
 /*
 * Titre : Restaurant.h - Travail Pratique #1
-* Date : 09 Janvier 2019
-* Auteur : David Dratwa
+* Date : 01 Fevrier 2019
+* Auteur : Yanis Toubal et Estefan Vega Calcada
 */
 
 #ifndef RESTAURANT_H

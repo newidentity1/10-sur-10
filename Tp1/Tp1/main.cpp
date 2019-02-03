@@ -1,7 +1,7 @@
 /*
 * Titre : main.cpp - Travail Pratique #1
-* Date : 09 Janvier 2019 
-* Auteur : David Dratwa
+ * Date : 01 Fevrier 2019
+ * Auteur : Yanis Toubal et Estefan Vega Calcada
 */
 
 #include "Restaurant.h"
@@ -9,7 +9,6 @@
 using namespace std; 
 
 int main() {
-
     
 	//creation du restaurant - avec le fichier donne - le nom : PolyFood - moment de la journee : soir. 
     string nomfichier = "polyFood.txt";
@@ -54,10 +53,12 @@ int main() {
 	//liberer les tables
     poly.libererTable(1);
     poly.libererTable(2);
+    poly.libererTable(3);
     poly.libererTable(4);
 
 	//afficher le restaurant 
 	poly.afficher();
-	return 0;
+	
+    return 0;
 
 }

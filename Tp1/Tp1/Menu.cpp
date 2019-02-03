@@ -1,109 +1,103 @@
 #include "Menu.h"
 
-Menu::Menu() {
+Menu::Menu()
+{
     capacite_ = MAXPLAT;
     listePlats_ = new Plat* [capacite_];
     nbPlats_ = 0;
     type_ = Matin;
 }
 
-Menu::Menu(const string& fichier, TypeMenu type ) {
+Menu::Menu(const string& fichier, TypeMenu type )
+{
     capacite_ = MAXPLAT;
-    type_ = type;
     listePlats_ = new Plat* [capacite_];
     nbPlats_ = 0;
+    type_ = type;
     lireMenu(fichier);
-    
 }
 
-Menu::~Menu() {
-    for (unsigned i=0; i<nbPlats_; i++){
+Menu::~Menu()
+{
+    for (unsigned i = 0; i < nbPlats_; i++)
         delete listePlats_[i];
-    }
+    
         delete [] listePlats_;
         listePlats_ = nullptr;
-    
 }
 
 int Menu::getNbPlats() const{
     return nbPlats_;
 }
 
-Plat* Menu::trouverPlat(const string& nom) const {
-    
-        for(unsigned i =0; i < nbPlats_ ; i++) {
+Plat* Menu::trouverPlat(const string& nom) const
+{
+    for (unsigned i = 0; i < nbPlats_; i++) {
             if (listePlats_[i]->getNom() == nom)
                 return listePlats_[i];
         }
     return nullptr;
 }
 
-void Menu::ajouterPlat(Plat& plat) {
-   
-    if( capacite_ == 0)
-        capacite_= MAXPLAT;
-    
-    if (capacite_ == nbPlats_ ){
+void Menu::ajouterPlat(Plat& plat)
+{
+    if (capacite_ == nbPlats_ ) {
         capacite_ *= 2;
         Plat** nouveauTableau = new Plat* [capacite_];
         
-        for (unsigned i=0; i < nbPlats_; i++) {
+        for (unsigned i = 0; i < nbPlats_; i++)
             nouveauTableau[i] = listePlats_[i];
-        }
+        
         delete [] listePlats_;
-        listePlats_= nouveauTableau;
+        listePlats_ = nouveauTableau;
         listePlats_[nbPlats_++] = &plat;
    
-    } else {
+    }
+    else {
         listePlats_[nbPlats_++] = &plat;
     }
 }
 
-void Menu::ajouterPlat(const string& nom, double montant, double cout) {
-    
+void Menu::ajouterPlat(const string& nom, double montant, double cout)
+{
     Plat* nouveauPlat = new Plat(nom, montant, cout);
     ajouterPlat(*nouveauPlat);
-    
 }
 
-bool Menu::lireMenu(const string& fichier) {
+bool Menu::lireMenu(const string& fichier)
+{
     ifstream fichierPlats(fichier);
+    
     if (fichierPlats.fail()) {
-        
-        cout<< "Erreur d'ouverture de fichier"<<endl;
+        cout << "Erreur d'ouverture de fichier" << endl;
         return false;
-        
-    }else {
+    }
+    else {
         while (!ws(fichierPlats).eof()) {
-            
             string motLu="";
             fichierPlats >> motLu;
-
-            static const string enteteFichierTexte[4] = {"-MATIN", "-MIDI", "-SOIR", "-TABLES"};
-            if (enteteFichierTexte[type_] == motLu){
-                while(true){
+            
+            if (CHOISIR_TYPE_MENU[type_] == motLu) {
+                while (true) {
                     string nom;
                     double prix,coutResto;
                     fichierPlats >> nom >> prix >> coutResto;
                     
-                    if(nom == "-MIDI" || nom == "-SOIR" || nom == "-TABLES")
+                    if (nom == "-MIDI" || nom == "-SOIR" || nom == "-TABLES")
                         return true;
+                   
                     ajouterPlat(nom, prix, coutResto);
                 }
-                
             }
-            
         }
-            return false;
+        return false;
     }
 }
 
-void Menu::afficher() const {
-    static const string typeMenu[3] = {"Matin", "Midi", "SOIR"};
-    cout << typeMenu[type_] << " :" << endl;
+void Menu::afficher() const
+{
+    cout << CHOISIR_TYPE_MENU[type_] << " :" << endl;
     
-    for (unsigned i=0; i < nbPlats_; i++) {
+    for (unsigned i = 0; i < nbPlats_; i++)
         listePlats_[i]->afficher();
-        
-    }
 }

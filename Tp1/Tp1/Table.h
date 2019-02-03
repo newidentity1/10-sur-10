@@ -1,16 +1,19 @@
 /*
 * Titre : Table.h - Travail Pratique #1
-* Date : 09 Janvier 2019
-* Auteur : David Dratwa
+* Date : 01 Fevrier 2019
+* Auteur : Yanis Toubal et Estefan Vega Calcada
 */
 
 #ifndef TABLE_H
 #define TABLE_H
 
 #include "Menu.h"
+
 const  int MAXCAP = 5;
-class Table {
-public: 
+
+class Table
+{
+public:
 	//constructeurs 
 	Table(); 
 	Table(int id, int nbPlaces);
@@ -34,7 +37,8 @@ public:
 
 	//affichage
 	void afficher() const; 
-private : 
+
+private :
 	Plat** commande_; 
 	unsigned int capacite_; 
 	unsigned int nbPlats_; 
@@ -43,4 +47,5 @@ private :
 	unsigned int nbPlaces_; 
 	bool occupee_; 
 };
+
 #endif // !TABLE_H

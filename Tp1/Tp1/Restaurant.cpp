@@ -1,15 +1,8 @@
-//
-//  Restaurant.cpp
-//  Tp1
-//
-//  Created by Yanis Toubal on 2019-01-25.
-//  Copyright © 2019 Yanis Toubal. All rights reserved.
-//
-
 #include "Restaurant.h"
 
 
-Restaurant::Restaurant(){
+Restaurant::Restaurant()
+{
     nom_ = nullptr;
     chiffreAffaire_ = 0.0;
     setMoment(Matin);
@@ -19,10 +12,10 @@ Restaurant::Restaurant(){
     capaciteTables_ = INTTABLES;
     tables_ = new Table*[capaciteTables_];
     nbTables_ = 0;
-    
 }
 
-Restaurant::Restaurant(const string& fichier,const string& nom, TypeMenu moment){
+Restaurant::Restaurant(const string& fichier,const string& nom, TypeMenu moment)
+{
     nom_ = new string;
     *nom_ = nom;
     chiffreAffaire_ = 0.0;
@@ -34,73 +27,90 @@ Restaurant::Restaurant(const string& fichier,const string& nom, TypeMenu moment)
     tables_ = new Table*[capaciteTables_];
     nbTables_ = 0;
     lireTable(fichier);
-    
 }
 
-Restaurant::~Restaurant(){
-    
-    for (unsigned i=0; i<nbTables_; i++){
+Restaurant::~Restaurant()
+{
+    for (unsigned i = 0; i < nbTables_; i++)
         delete tables_[i];
-    }
+    
     delete [] tables_;
     tables_ = nullptr;
     
+    delete menuMatin_;
+    menuMatin_ = nullptr;
+   
+    delete menuMidi_;
+    menuMatin_ = nullptr;
+    
+    delete menuSoir_;
+    menuMatin_ = nullptr;
+    
+    delete nom_;
+    nom_ = nullptr;
 }
 
-string Restaurant::getNom() const{
+string Restaurant::getNom() const
+{
     return *nom_;
-    
 }
 
-TypeMenu Restaurant::getMoment() const{
+TypeMenu Restaurant::getMoment() const
+{
     return momentJournee_;
-    
 }
 
-void Restaurant::setMoment(TypeMenu moment){
+void Restaurant::setMoment(TypeMenu moment)
+{
     momentJournee_ = moment;
-    
 }
 
-void Restaurant::lireTable(const string& fichier){
+void Restaurant::lireTable(const string& fichier)
+{
     ifstream fichierLu(fichier);
-    
     string motLu;
-    while(!ws(fichierLu).eof()){
-        
-        fichierLu >> motLu;
-        if(motLu == "-TABLES"){
-            while(!ws(fichierLu).eof()){
-                int id, nbPlaces;
-                fichierLu >> id >> nbPlaces;
-                ajouterTable(id, nbPlaces);
-            }
-            return;
-        }
-    }
     
+    if (fichierLu.fail()) {
+        cout << "Erreur d'ouverture de fichier" << endl;
+    }
+    else {
+           while (!ws(fichierLu).eof()) {
+                fichierLu >> motLu;
+        
+                if (motLu == "-TABLES") {
+                    while (!ws(fichierLu).eof()) {
+                        int id, nbPlaces;
+                        fichierLu >> id >> nbPlaces;
+                        ajouterTable(id, nbPlaces);
+                    }
+                }
+           }
+    }
 }
 
-void Restaurant::ajouterTable(int id, int nbPlaces){
+void Restaurant::ajouterTable(int id, int nbPlaces)
+{
     
-    if (nbTables_ == capaciteTables_){
+    if (nbTables_ == capaciteTables_) {
         capaciteTables_ *= 2;
         Table** nouveauTableau = new Table*[capaciteTables_];
     
-        for (unsigned i =0; i < nbTables_; i++){
+        for (unsigned i =0; i < nbTables_; i++)
             nouveauTableau[i] = tables_[i];
-        }
+        
         delete [] tables_;
         tables_ = nouveauTableau;
         tables_[nbTables_++] = new Table(id, nbPlaces);
-    }else{
+    }
+    else {
         tables_[nbTables_++] = new Table(id, nbPlaces);
     }
 }
 
-void Restaurant::libererTable(int id){
-    for (unsigned i =0; i<nbTables_; i++){
-        if(tables_[i]->getId() == id){
+void Restaurant::libererTable(int id)
+{
+    for (unsigned i = 0; i < nbTables_; i++){
+        if (tables_[i]->getId() == id) {
             chiffreAffaire_ += tables_[i]->getChiffreAffaire();
             tables_[i]->libererTable();
             
@@ -108,64 +118,74 @@ void Restaurant::libererTable(int id){
     }
 }
 
-void Restaurant::commanderPlat(string nom, int idTable){
+void Restaurant::commanderPlat(string nom, int idTable)
+{
     bool idTrouver = false;
-    int indexID;
+    int indexID = -1;
     Plat* platTrouve = nullptr;
     
-    for (unsigned i =0; i<nbTables_; i++){
-        if(tables_[i]->getId() == idTable){
+    for (unsigned i = 0; i < nbTables_; i++){
+        if (tables_[i]->getId() == idTable) {
             idTrouver = true;
             indexID = i;
-            switch(momentJournee_){
+           
+            switch (momentJournee_) {
                 case(Matin): platTrouve = menuMatin_->trouverPlat(nom);
                     break;
+                
                 case(Midi): platTrouve = menuMidi_->trouverPlat(nom);
                     break;
+                
                 case(Soir): platTrouve = menuSoir_->trouverPlat(nom);
                     break;
             }
         }
     }
-    if (idTrouver && platTrouve != nullptr){
+    
+    if (idTrouver && platTrouve != nullptr) {
             tables_[indexID]->commander(platTrouve);
-    }else {
-        cout<< "Erreur : table non occupee ou plat introuvable"<<endl;
+    }
+    else {
+        cout << "Erreur : table non occupee ou plat introuvable" << endl;
     }
     
 }
 
-void Restaurant::placerClients(int nbClients){
+void Restaurant::placerClients(int nbClients)
+{
     Table meilleurTable(-1, 99999);
     int indexMeilleurTable = meilleurTable.getId(); // -1
 
-    for (unsigned i =0; i < nbTables_; i++) {
-        if(!tables_[i]->estOccupee() && (tables_[i]->getNbPlaces() >= nbClients)){
-            if (tables_[i]->getNbPlaces() < meilleurTable.getNbPlaces()){
+    for (unsigned i = 0; i < nbTables_; i++) {
+        if (!tables_[i]->estOccupee() && (tables_[i]->getNbPlaces() >= nbClients)) {
+            if (tables_[i]->getNbPlaces() < meilleurTable.getNbPlaces()) {
                 indexMeilleurTable = i;
             }
         }
     }
-        if (indexMeilleurTable != -1){
+        if (indexMeilleurTable != -1) {
             tables_[indexMeilleurTable]->placerClient();
-        }else {
+        }
+        else {
             cout << "Erreur : il n'y a plus/pas de table disponible pour le client" << endl;
-    }
+        }
 }
 
-void Restaurant::afficher() const{
-    if (chiffreAffaire_ == 0.0){
-        cout<< "Le restaurant " << *nom_ << " n'a pas fait de benefice ou le chiffre n'est pas encore calcule." <<endl;
-    }else{
-    cout<< "Le restaurant " << *nom_ << " a fait un chiffre d'affaire de : "<< chiffreAffaire_ << " $"<<endl;
+void Restaurant::afficher() const
+{
+    if (chiffreAffaire_ == 0.0) {
+        cout << "Le restaurant " << *nom_ << " n'a pas fait de benefice ou le chiffre n'est pas encore calcule." << endl;
     }
-        
-    cout<< "Voici les tables :"<<endl;
-    for(unsigned i =0; i<nbTables_; i++){
+    else {
+        cout << "Le restaurant " << *nom_ << " a fait un chiffre d'affaire de : "<< chiffreAffaire_ << " $"<<endl;
+    }
+    cout << "Voici les tables :" << endl;
+    
+    for (unsigned i = 0; i < nbTables_; i++) {
         tables_[i]->afficher();
-        cout<< endl;
+        cout << endl;
     }
-    cout<<endl;
+    cout << endl;
     cout << "-Voici le menu :\n";
     menuMatin_->afficher();
     menuMidi_->afficher();

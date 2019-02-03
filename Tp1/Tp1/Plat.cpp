@@ -1,40 +1,45 @@
 #include "Plat.h"
 
 Plat::Plat() {
-        nom_ = "inconnu";
-        prix_ = 0.00;
+        setNom("inconnu");
+        setPrix(0.00);
         cout_ = 0.00;
 }
 
 Plat::Plat(string nom, double prix, double cout){
-        nom_ = nom;
-        prix_ = prix;
+        setNom(nom);
+        setPrix(prix);
         cout_ = cout;
-    
 }
 
 Plat::~Plat(){}
 
-string Plat::getNom() const {
+string Plat::getNom() const
+{
         return nom_;
 }
 
-double Plat::getPrix() const {
+double Plat::getPrix() const
+{
         return prix_;
 }
 
-double Plat::getCout() const {
+double Plat::getCout() const
+{
         return cout_;
 }
 
-void Plat::setNom(string nom) {
+void Plat::setNom(string nom)
+{
         nom_ = nom;
 }
 
-void Plat::setPrix(double prix) {
+void Plat::setPrix(double prix)
+{
         prix_ = prix;
 }
 
-void Plat::afficher() const {
-        cout <<"\t\t"<< nom_ << " - " << prix_ << "$ (" << cout_ << "$ pour le restaurant)" << endl;
+void Plat::afficher() const
+{
+        cout << "\t\t" << nom_ << " - " << prix_ << "$ (" << cout_ << "$ pour le restaurant)" << endl;
 }
