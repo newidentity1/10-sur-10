@@ -11,11 +11,8 @@ using namespace std;
 int main() {
     
     
-    Menu menu("polyFood.txt", Matin);
-    cout << menu << endl;
-    
     //creation du restaurant
-	/*Restaurant poly("polyFood.txt", "PolyFood", Soir);
+	Restaurant poly("polyFood.txt", "PolyFood", Soir);
 
 	///creer plusieurs clients 
 	int nbclient1 = 1; 
@@ -57,7 +54,7 @@ int main() {
 	poly.libererTable(3);
 	poly.libererTable(4);
 
-	//cout << poly;
+	cout << poly;
 
 	cout << "====================================================================================================" << endl;
 
@@ -70,6 +67,6 @@ int main() {
 	cout << "--------------------------------------------------------------------------------------------------" << endl;
 	// Le restaurant Poly2 doit maintenant avoir toutes ses tables libérées
 	cout << poly2;
-    */
+   // */
     return 0;
 }

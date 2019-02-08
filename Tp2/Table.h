@@ -28,22 +28,19 @@ public:
 	bool estOccupee() const;
 
 	///setters
-	void libererTable(); // A MODIFIER
+    void libererTable();
 	void placerClient(int nbClients);
 	void setId(int id);
 
 	///autres methodes
-	void commander(Plat* plat); // A MODIFIER
+	void commander(Plat* plat);
 	double getChiffreAffaire() const;
 
 	///affichage
-    friend ostream& operator<<(ostream& sortie, const Table& table); //A MODIFIER
+    friend ostream& operator<<(ostream& sortie, const Table& table);
 
 private :
-	//A MODIFIER
-	//int capacite_;
 	vector<Plat*> commande_;
-	//int nbPlats_;
 	int id_;
 	int nbPlaces_;
 	int nbClientsATable_;

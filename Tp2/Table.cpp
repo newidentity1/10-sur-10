@@ -9,9 +9,6 @@
 //constructeurs
 Table::Table()
 {
-	//capacite_ = MAXCAP;
-	//commande_ = new Plat*[MAXCAP];
-	//nbPlats_ = 0;
 	id_ = -1;
 	nbPlaces_ = 1;
 	nbClientsATable_ = 0;
@@ -19,17 +16,13 @@ Table::Table()
 
 Table::Table(int id, int nbPlaces)
 {
-	//capacite_ = MAXCAP;
-	//commande_ = new Plat*[capacite_];
-	//nbPlats_ = 0;
 	id_ = id;
 	nbPlaces_ = nbPlaces;
 	nbClientsATable_ = 0;
 }
 
 //destructeur
-Table::~Table()
-{}
+Table::~Table() {}
 
 //getters
 int Table::getId() const
@@ -67,9 +60,7 @@ void Table::libererTable()
 {
 	nbPlaces_ += nbClientsATable_;
 	nbClientsATable_ = 0;
-	//A MODIFIER
     commande_.clear();
-	
 }
 
 void Table::placerClient(int nbClients)
@@ -81,7 +72,6 @@ void Table::placerClient(int nbClients)
 //autres methodes
 void Table::commander(Plat* plat)
 {
-	// A MODIFIER
 	commande_.push_back(plat);
 }
 
@@ -95,8 +85,8 @@ double Table::getChiffreAffaire() const
 }
 
 //affichage
-ostream& operator<<(ostream& sortie, const Table& table){
-    
+ostream& operator<<(ostream& sortie, const Table& table)
+{
     sortie << "La table numero " << table.getId();
     if (table.estOccupee()) {
         sortie << " est occupee. ";
@@ -104,7 +94,7 @@ ostream& operator<<(ostream& sortie, const Table& table){
              sortie << "Voici la commande passee par les clients : " << endl;
             for (int i = 0; i < table.commande_.size(); i++) {
                 sortie  << "\t";
-                sortie << table.commande_[i];
+                sortie << *(table.commande_[i]);
             }
         }
         else

@@ -32,9 +32,9 @@ public:
 
 	//Autres methodes
 	void lireTable(const string& fichier);
-	Restaurant& operator+=(Table* table); // A MODIFIER
+	Restaurant& operator+=(Table* table);
 	void libererTable(int id);
-    friend ostream& operator<<(ostream& sortie,const Restaurant& restaurant); // A MODIFIER
+    friend ostream& operator<<(ostream& sortie,const Restaurant& restaurant);
 	void commanderPlat(const string& nom, int idTable); 
 
 	void placerClients(int nbClients);
@@ -52,11 +52,7 @@ private:
 	Menu* menuMidi_;
 	Menu* menuSoir_;
 
-	// A MODIFIER
-
 	//vecteur des tables
-	//int capaciteTables_;
 	vector<Table*> tables_;
-	//int nbTables_;
 };
 #endif // !RESTAURANT_H
