@@ -27,7 +27,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		21286A0B21FB437900252CF2 /* Tp1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = Tp1; path = /Users/yanistoubal/Desktop/INF1010/INF1010TP1/Tp1/build/Debug/Tp1; sourceTree = "<absolute>"; };
 		21286A1F21FB493000252CF2 /* Menu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Menu.cpp; sourceTree = "<group>"; };
 		21286A2021FB493000252CF2 /* Plat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plat.h; sourceTree = "<group>"; };
 		21286A2121FB493000252CF2 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
@@ -37,6 +36,7 @@
 		21286A2521FB493100252CF2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		21286A2921FB495B00252CF2 /* Restaurant.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Restaurant.cpp; sourceTree = "<group>"; };
 		214016D12203AAD800FEBA35 /* Table.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Table.cpp; sourceTree = "<group>"; };
+		214016D32204821500FEBA35 /* Tp1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tp1; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +54,7 @@
 			isa = PBXGroup;
 			children = (
 				21286A0D21FB437900252CF2 /* Tp1 */,
+				214016D32204821500FEBA35 /* Tp1 */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,8 +66,8 @@
 				21286A2121FB493000252CF2 /* Menu.h */,
 				21286A2321FB493100252CF2 /* Plat.cpp */,
 				21286A2021FB493000252CF2 /* Plat.h */,
-				21286A2421FB493100252CF2 /* Table.h */,
 				214016D12203AAD800FEBA35 /* Table.cpp */,
+				21286A2421FB493100252CF2 /* Table.h */,
 				21286A2921FB495B00252CF2 /* Restaurant.cpp */,
 				21286A2221FB493000252CF2 /* Restaurant.h */,
 			);
@@ -90,7 +91,7 @@
 			);
 			name = Tp1;
 			productName = Tp1;
-			productReference = 21286A0B21FB437900252CF2 /* Tp1 */;
+			productReference = 214016D32204821500FEBA35 /* Tp1 */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */

@@ -1,5 +1,10 @@
-#include "Restaurant.h"
+/*
+ * Titre : Restaurant.cpp - Travail Pratique #1
+ * Date : 01 Fevrier 2019
+ * Auteur : Yanis Toubal et Estefan Vega Calcada
+ */
 
+#include "Restaurant.h"
 
 Restaurant::Restaurant()
 {
@@ -118,7 +123,7 @@ void Restaurant::libererTable(int id)
     }
 }
 
-void Restaurant::commanderPlat(string nom, int idTable)
+void Restaurant::commanderPlat(string& nom, int idTable)
 {
     bool idTrouver = false;
     int indexID = -1;
@@ -148,12 +153,11 @@ void Restaurant::commanderPlat(string nom, int idTable)
     else {
         cout << "Erreur : table non occupee ou plat introuvable" << endl;
     }
-    
 }
 
 void Restaurant::placerClients(int nbClients)
 {
-    Table meilleurTable(-1, 99999);
+    Table meilleurTable(-1, INT_MAX);
     int indexMeilleurTable = meilleurTable.getId(); // -1
 
     for (unsigned i = 0; i < nbTables_; i++) {
@@ -177,7 +181,7 @@ void Restaurant::afficher() const
         cout << "Le restaurant " << *nom_ << " n'a pas fait de benefice ou le chiffre n'est pas encore calcule." << endl;
     }
     else {
-        cout << "Le restaurant " << *nom_ << " a fait un chiffre d'affaire de : "<< chiffreAffaire_ << " $"<<endl;
+        cout << "Le restaurant " << *nom_ << " a fait un chiffre d'affaire de : "<< chiffreAffaire_ << " $." << endl;
     }
     cout << "Voici les tables :" << endl;
     

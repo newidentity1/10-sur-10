@@ -29,7 +29,7 @@ public:
 	void lireTable(const string& fichier); 
 	void ajouterTable(int id, int nbPlaces);
 	void libererTable(int id); 
-	void commanderPlat(string nom, int idTable);
+	void commanderPlat(string& nom, int idTable);
 	void placerClients(int nbClients); 
 
 	//affichage 

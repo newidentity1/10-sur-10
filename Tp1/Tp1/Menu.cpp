@@ -1,3 +1,9 @@
+/*
+ * Titre : Menu.cpp - Travail Pratique #1
+ * Date : 01 Fevrier 2019
+ * Auteur : Yanis Toubal et Estefan Vega Calcada
+ */
+
 #include "Menu.h"
 
 Menu::Menu()
@@ -96,7 +102,7 @@ bool Menu::lireMenu(const string& fichier)
 
 void Menu::afficher() const
 {
-    cout << CHOISIR_TYPE_MENU[type_] << " :" << endl;
+    cout << AFFICHER_TYPE_MENU[type_] << " :" << endl;
     
     for (unsigned i = 0; i < nbPlats_; i++)
         listePlats_[i]->afficher();

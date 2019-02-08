@@ -1,5 +1,5 @@
 /*
-* Titre : Table.h - Travail Pratique #1
+* Titre : Menu.h - Travail Pratique #1
 * Date : 01 Fevrier 2019
 * Auteur : Yanis Toubal et Estefan Vega Calcada
 */

@@ -37,12 +37,19 @@ int main() {
 	//Poulet - Table 4
 	//Muffin - Table 4 
 	//Oeud - Table 4
-    poly.commanderPlat("Poisson", 1);
-    poly.commanderPlat("Poulet", 2);
-    poly.commanderPlat("Pizza", 2);
-    poly.commanderPlat("Poulet", 4);
-    poly.commanderPlat("Muffin", 4);
-    poly.commanderPlat("Oeuf", 4);
+    string commande1 = "Poisson";
+    string commande2 = "Poulet";
+    string commande3 = "Pizza";
+    string commande4 = "Poulet";
+    string commande5 = "Muffin";
+    string commande6 = "Oeuf";
+    
+    poly.commanderPlat(commande1, 1);
+    poly.commanderPlat(commande2, 2);
+    poly.commanderPlat(commande3, 2);
+    poly.commanderPlat(commande4, 4);
+    poly.commanderPlat(commande5, 4);
+    poly.commanderPlat(commande6, 4);
 	
 
 	//afficher le restaurant

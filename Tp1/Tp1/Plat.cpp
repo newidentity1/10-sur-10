@@ -1,3 +1,9 @@
+/*
+ * Titre : Plat.cpp - Travail Pratique #1
+ * Date : 01 Fevrier 2019
+ * Auteur : Yanis Toubal et Estefan Vega Calcada
+ */
+
 #include "Plat.h"
 
 Plat::Plat() {
