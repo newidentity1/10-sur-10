@@ -8,26 +8,24 @@
 
 //constructeurs
 
-Menu::Menu()
-{
-	type_ = Matin;
-}
+Menu::Menu() :
+    type_(Matin)
+{}
 
-Menu::Menu(string fichier, TypeMenu type)
+Menu::Menu(string fichier, TypeMenu type) :
+    type_(type)
 {
-	type_ = type;
-    
 	//lecture du fichier -- creation du menu
 	lireMenu(fichier);
 }
 
-Menu::Menu(const Menu& menu)
+Menu::Menu(const Menu& menu) :
+    type_(menu.type_)
 {
     for (int i = 0; i < menu.listePlats_.size(); i++){
         Plat* copiePlat = new Plat(*(menu.listePlats_[i]));
         listePlats_.push_back(copiePlat);
     }
-    type_ = menu.type_;
 }
 
 //destructeur
@@ -64,20 +62,21 @@ Menu& Menu::operator=(Menu& menu)
 {
     if (this != &menu)
     {
-   // for (int i = 0; i < listePlats_.size(); i++)
-   //    delete listePlats_[i];
-   // listePlats_.clear();
+        for (int i = 0; i < listePlats_.size(); i++)
+            delete listePlats_[i];
+        listePlats_.clear();
   
         for (int i = 0; i < menu.listePlats_.size(); i++) {
             Plat* copiePlat = new Plat(*(menu.listePlats_[i]));
             listePlats_.push_back(copiePlat);
         }
-    type_ = menu.type_;
+        type_ = menu.type_;
     }
         return *this;
 }
 
-bool Menu::lireMenu(const string& fichier) {
+bool Menu::lireMenu(const string& fichier)
+{
     ifstream fichierPlats(fichier);
     
     if (fichierPlats.fail()) {
@@ -220,8 +219,8 @@ Plat * Menu::trouverPlatMoinsCher() const
 	return listePlats_[found];
 }
 
-Plat* Menu::trouverPlat(const string& nom) const {
-	
+Plat* Menu::trouverPlat(const string& nom) const
+{
     for (int i = 0; i < listePlats_.size(); i++) {
 		if (listePlats_[i]->getNom() == nom)
 			return listePlats_[i];

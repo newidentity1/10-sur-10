@@ -7,27 +7,30 @@
 #include "Restaurant.h"
 
 //constructeurs
-Restaurant::Restaurant()
+Restaurant::Restaurant() :
+    nom_(nullptr),
+    chiffreAffaire_(0.0),
+    momentJournee_(Matin),
+    menuMatin_(nullptr),
+    menuMidi_(nullptr),
+    menuSoir_(nullptr)
 {
 	nom_ = new string("Inconnu");
-
-	chiffreAffaire_ = 0.0;
-
-	momentJournee_ = Matin;
 
 	menuMatin_ = new Menu("menu.txt", Matin);
 	menuMidi_ = new Menu("menu.txt", Midi);
 	menuSoir_ = new Menu("menu.txt",  Soir);
 }
 
-Restaurant::Restaurant(const string& fichier,  const string& nom, TypeMenu moment)
+Restaurant::Restaurant(const string& fichier,  const string& nom, TypeMenu moment) : nom_(nullptr),
+    chiffreAffaire_(0.0),
+    momentJournee_(moment),
+    menuMatin_(nullptr),
+    menuMidi_(nullptr),
+    menuSoir_(nullptr)
 {
 	nom_ = new string(nom);
-
-	chiffreAffaire_ = 0.0;
-
-	momentJournee_ = moment;
-
+    
 	menuMatin_ = new Menu(fichier, Matin);
 	menuMidi_ = new Menu(fichier,  Midi);
     menuSoir_ = new Menu(fichier,  Soir);
@@ -35,14 +38,15 @@ Restaurant::Restaurant(const string& fichier,  const string& nom, TypeMenu momen
 	lireTable(fichier);
 }
 
-Restaurant::Restaurant(const Restaurant& restaurant) :  menuMatin_(nullptr), menuMidi_(nullptr), menuSoir_(nullptr), nom_(nullptr)
+Restaurant::Restaurant(const Restaurant& restaurant) :
+    nom_(nullptr),
+    chiffreAffaire_(restaurant.chiffreAffaire_),
+    momentJournee_(restaurant.momentJournee_),
+    menuMatin_(nullptr),
+    menuMidi_(nullptr),
+    menuSoir_(nullptr)
 {
-   
     nom_ = new string(*(restaurant.nom_));
-    chiffreAffaire_ = restaurant.chiffreAffaire_;
-    
-    momentJournee_ = restaurant.momentJournee_;
-    
     menuMatin_ = new Menu(*(restaurant.menuMatin_));
     menuMidi_ = new Menu (*(restaurant.menuMidi_));
     menuSoir_ = new Menu (*(restaurant.menuSoir_));
@@ -74,6 +78,7 @@ void Restaurant::setMoment(TypeMenu moment)
 
 void Restaurant::setNom(string nom)
 {
+    delete nom_;
     nom_ = new string(nom);
 }
 
@@ -130,17 +135,20 @@ Restaurant& Restaurant::operator=(const Restaurant& restaurant)
 {
     if (this != & restaurant){
     
-    //  for (int i = 0; i < tables_.size(); i++)
-    //     delete tables_[i];
-    // tables_.clear();
+        chiffreAffaire_ = restaurant.chiffreAffaire_;
+        momentJournee_ = restaurant.getMoment();
+        
+        for (int i = 0; i < tables_.size(); i++)
+            delete tables_[i];
+        tables_.clear();
     
         for (int i = 0; i < restaurant.tables_.size(); i++) {
             Table* nouvelleTable = new Table(*(restaurant.tables_[i]));
             tables_.push_back(nouvelleTable);
         }
     
-        //delete nom_;
-        //nom_ = new string(*(restaurant.nom_));
+        delete nom_;
+        nom_ = new string(*(restaurant.nom_));
         
         delete menuMatin_;
         delete menuMidi_;
@@ -150,8 +158,6 @@ Restaurant& Restaurant::operator=(const Restaurant& restaurant)
         menuMidi_ = new Menu (*(restaurant.menuMidi_));
         menuSoir_ = new Menu (*(restaurant.menuSoir_));
         
-        chiffreAffaire_ = restaurant.chiffreAffaire_;
-        momentJournee_ = restaurant.getMoment();
     }
     return *this;
 }

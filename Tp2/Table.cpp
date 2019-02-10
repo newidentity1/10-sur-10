@@ -7,19 +7,17 @@
 #include "Table.h"
 
 //constructeurs
-Table::Table()
-{
-	id_ = -1;
-	nbPlaces_ = 1;
-	nbClientsATable_ = 0;
-}
+Table::Table() :
+    id_(-1),
+    nbPlaces_(1),
+    nbClientsATable_(0)
+{}
 
-Table::Table(int id, int nbPlaces)
-{
-	id_ = id;
-	nbPlaces_ = nbPlaces;
-	nbClientsATable_ = 0;
-}
+Table::Table(int id, int nbPlaces) :
+    id_(id),
+    nbPlaces_(nbPlaces),
+    nbClientsATable_(0)
+{}
 
 //destructeur
 Table::~Table() {}
