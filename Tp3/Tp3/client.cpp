@@ -14,7 +14,7 @@ Client::Client() :
     statut_(Occasionnel)
 {}
 
-Client::Client(string nom, string prenom, int tailleGroupe) :
+Client::Client(const string& nom, string prenom, int tailleGroupe) :
     nom_(nom),
     prenom_(prenom),
     tailleGroupe_(tailleGroupe),
@@ -59,9 +59,8 @@ string Client::convertirStatutString() const
     }
 }
 
-
 ostream& operator<<(ostream& os, const Client& client)
 {
-    os << "Le client principal est:\n\t" << client.getPrenom() << " statut: " << client.convertirStatutString() << " ";
+    os << "Le client principal est:\n\t" << "-" << client.getNom() << " " <<client.getPrenom() << " statut: " <<client.convertirStatutString() << " ";
     return os;
 }

@@ -7,39 +7,32 @@
 #include "Restaurant.h"
 
 //constructeurs 
-Restaurant::Restaurant() {
-	nom_ = new string("Inconnu"); 
+Restaurant::Restaurant() :
+    nom_(new string("Inconnu")),
+    chiffreAffaire_(0.0),
+    momentJournee_(Matin),
+    menuMatin_(new Menu("menu.txt", Matin)),
+    menuMidi_(new Menu("menu.txt", Midi)),
+    menuSoir_(new Menu("menu.txt", Soir))
+{}
 
-	chiffreAffaire_ = 0; 
-	
-	momentJournee_ = Matin; 
-
-	menuMatin_ = new Menu("menu.txt", Matin);
-	menuMidi_ = new Menu("menu.txt", Midi);
-	menuSoir_ = new Menu("menu.txt",  Soir);
-
-}
-
-Restaurant::Restaurant(const string& fichier,  const string& nom, TypeMenu moment) {
-	nom_ = new string(nom); 
-
-	chiffreAffaire_ = 0; 
-
-	momentJournee_ = moment; 
-
-	menuMatin_ = new Menu(fichier, Matin);
-	menuMidi_ = new Menu(fichier,  Midi);
-	menuSoir_ = new Menu(fichier,  Soir);
-
+Restaurant::Restaurant(const string& fichier,  const string& nom, TypeMenu moment) :
+    nom_(new string(nom)),
+    chiffreAffaire_(0.0),
+    momentJournee_(moment),
+    menuMatin_(new Menu(fichier, Matin)),
+    menuMidi_(new Menu(fichier, Midi)),
+    menuSoir_(new Menu(fichier, Soir))
+{
 	lireTable(fichier); 
 	lireAdresses(fichier);
 }
 Restaurant::Restaurant(const Restaurant & restau) : nom_(new string(*restau.nom_)),
-chiffreAffaire_(restau.chiffreAffaire_),
-momentJournee_(restau.momentJournee_),
-menuMatin_(new Menu(*restau.menuMatin_)),
-menuMidi_(new Menu(*restau.menuMidi_)),
-menuSoir_(new Menu(*restau.menuSoir_))
+    chiffreAffaire_(restau.chiffreAffaire_),
+    momentJournee_(restau.momentJournee_),
+    menuMatin_(new Menu(*restau.menuMatin_)),
+    menuMidi_(new Menu(*restau.menuMidi_)),
+    menuSoir_(new Menu(*restau.menuSoir_))
 {
 	tables_.clear();
 	for (unsigned i = 0; i < restau.tables_.size(); ++i)
@@ -97,7 +90,7 @@ void Restaurant::libererTable(int id) {
 
 	for (unsigned i = 0; i < tables_.size(); ++i) {
 		if (id == tables_[i]->getId()) {
-			chiffreAffaire_ += tables_[i]->getChiffreAffaire(); 
+			chiffreAffaire_ += tables_[i]->getChiffreAffaire() - calculerReduction(tables_[i]->getCliengtPrincipal(), tables_[i]->getChiffreAffaire(), (i == INDEX_TABLE_LIVRAISON));
 			tables_[i]->libererTable(); 
 			break;
 		}
@@ -142,7 +135,7 @@ void Restaurant::commanderPlat(const string& nom, int idTable,TypePlat type, int
 
 	///TODO
 	/// Modifier la fonction pour ajouter des plats customisés aux commandes
-	Plat* plat = nullptr; 
+	Plat* plat = nullptr;
 	int index; 
 	for (unsigned i = 0; i < tables_.size(); i++) {
 		if (idTable == tables_[i]->getId()) {
@@ -169,13 +162,16 @@ void Restaurant::commanderPlat(const string& nom, int idTable,TypePlat type, int
 	}
 	else
 	{
-		tables_[index]->commander(plat);
+        if (type == Custom){
+            tables_[index]->commander(static_cast<PlatCustom*>(plat));
+        }else{
+            tables_[index]->commander(plat);
+        }
 
 	}
 
  
 }
-
 
 
 bool Restaurant::operator<(const Restaurant & restau) const 
@@ -254,12 +250,8 @@ Restaurant& Restaurant::operator+=(Table* table) {
 	return *this;
 }
 
-Restaurant& Restaurant::operator+=(Table* table) {
-	tables_.push_back(new Table(*table));
-	return *this;
-}
-
-void Restaurant::placerClients(int nbClients) {
+void Restaurant::placerClients(Client* client)
+{
 
 	/// TODO 
 	///Modifier Afin qu'elle utilise un objet de la classe clients 
@@ -270,7 +262,8 @@ void Restaurant::placerClients(int nbClients) {
 
 
 	for (unsigned i = 0; i < tables_.size(); i++) {
-		if (tables_[i]->getNbPlaces() >= nbClients && !tables_[i]->estOccupee() && tables_[i]->getNbPlaces() < minimum) {
+		if (tables_[i]->getNbPlaces() >= (1 + client->getTailleGroupe()) && // +1 pour inclure le client
+            !tables_[i]->estOccupee() && tables_[i]->getNbPlaces() < minimum) {
 			indexTable = i;
 			minimum = tables_[i]->getNbPlaces();
 		}
@@ -279,18 +272,25 @@ void Restaurant::placerClients(int nbClients) {
 		cout << "Erreur : il n'y a plus/pas de table disponible pour les clients. " << endl;
 	}
 	else
-		tables_[indexTable]->placerClients(nbClients);
+		tables_[indexTable]->placerClients((1 + client->getTailleGroupe() )); // +1 pour inclure le client
 }
 
-void Restaurant::livrerClient(Client * client, vector<string> commande)
+void Restaurant::livrerClient(Client * client, const vector<string>& commande)
 {
 	///TODO
 	///se réferer à l'énoncé 
 	///vérifier que le client a droit aux livraisons
 	///Si oui lui assigner la table des livraisons 
 	///Effectuer la commande
-
-
+    
+    if (client->getStatut() == Prestige)
+    {
+        tables_[INDEX_TABLE_LIVRAISON]->placerClients(1);
+        
+        for (size_t i = 0; i < commande.size(); i++)
+            commanderPlat(commande[i], tables_[INDEX_TABLE_LIVRAISON]->getId());
+    }
+    
 }
 
 
@@ -342,4 +342,32 @@ void Restaurant::lireAdresses(const string & fichier)
 		}
 	}
 
-
+double Restaurant::calculerReduction(Client* client, double montant, bool livraison)
+{
+    switch (client->getStatut()) {
+            
+        case Occasionnel:
+            return 0.0;
+            break;
+        
+        case Fidele:
+            if (static_cast<ClientRegulier*>(client)->getNbPoints() > SEUIL_DEBUT_REDUCTION)
+            {
+                return (montant * TAUX_REDUC_REGULIER);
+            }else
+            {
+            return 0.0;
+            }
+            break;
+       
+        case Prestige:
+            if (static_cast<ClientPrestige*>(client)->getNbPoints() > SEUIL_LIVRAISON_GRATUITE && livraison)
+            {
+                return (montant * TAUX_REDUC_PRESTIGE + getFraisTransports(static_cast<ClientPrestige*>(client)->getAddresseCode()));
+            }else
+            {
+                return (montant * TAUX_REDUC_PRESTIGE);
+            }
+            break;
+    }
+}

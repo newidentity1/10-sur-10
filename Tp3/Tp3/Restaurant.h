@@ -45,9 +45,9 @@ public:
 	bool operator < (const Restaurant& restau) const ;
 	Restaurant& operator = (const Restaurant& restau); 
 	///TODO 
-	void placerClients(int nbClients);///A Modifier
+	void placerClients(Client* client);///A Modifier
 	///TODO
-	void livrerClient(Client * client, vector<string>nomPlats);
+	void livrerClient(Client * client, const vector<string>& commande);
 	///TODO
 	double calculerReduction(Client* client, double montant, bool livraison);
 	//TODO

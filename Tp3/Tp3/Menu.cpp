@@ -24,8 +24,16 @@ Menu::Menu(const Menu & menu): type_(menu.type_)
 	///TODO 
 	///Modifier
 	for (unsigned i = 0; i < menu.listePlats_.size(); ++i)
-	{			listePlats_.push_back(new Plat(*menu.listePlats_[i]));
-
+	{
+        switch (menu.listePlats_[i]->getType()) {
+            case Regulier:
+                listePlats_.push_back(new Plat(*menu.listePlats_[i]));
+                break;
+                
+            case Bio:
+                listePlats_.push_back(new PlatBio(menu.listePlats_[i]->getNom(), menu.listePlats_[i]->getPrix(), menu.listePlats_[i]->getCout(), static_cast<PlatBio*>(menu.listePlats_[i])->getEcoTaxe()));
+                break;
+        }
 	}
 }
 
@@ -44,18 +52,32 @@ ostream& operator<<(ostream& os, const Menu& menu)
 {
 	for (unsigned i = 0; i < menu.listePlats_.size(); ++i) {
 		
-		if(menu.listePlats_[i]->getType()==Regulier)
-			os << "\t" << *menu.listePlats_[i];
-
-	}
-
+        switch (menu.listePlats_[i]->getType()) {
+            case Regulier:
+                os << "\t" << *menu.listePlats_[i];
+                break;
+            
+            case Bio:
+                os << "\t" << static_cast<PlatBio*>(menu.listePlats_[i]);
+                break;
+        }
+    }
 	return os;
 }
 
 
 
-Menu& Menu::operator+=(const Plat& plat) {
-	listePlats_.push_back(new Plat(plat));
+Menu& Menu::operator+=(const PlatBio& plat) {
+    
+    switch (plat.getType()) {
+        case Regulier:
+            listePlats_.push_back(new Plat(plat));
+            break;
+            
+        case Bio:
+            listePlats_.push_back(new PlatBio(plat));
+            break;
+    }
 	return *this;
 }
 
@@ -67,10 +89,21 @@ Menu & Menu::operator=(const Menu & menu)
 	if (this != &menu)
 	{
 		this->type_ = menu.type_;
-		listePlats_.clear();
+        
+        for (unsigned i = 0; i < menu.listePlats_.size(); ++i)
+           delete listePlats_[i];
+        listePlats_.clear();
 
 		for (unsigned i = 0; i < menu.listePlats_.size(); ++i)
-			listePlats_.push_back(new Plat(*menu.listePlats_[i]));
+            switch (menu.listePlats_[i]->getType()) {
+                case Regulier:
+                    listePlats_.push_back(new Plat(*menu.listePlats_[i]));
+                    break;
+                    
+                case Bio:
+                    listePlats_.push_back(new PlatBio(menu.listePlats_[i]->getNom(), menu.listePlats_[i]->getPrix(), menu.listePlats_[i]->getCout(), static_cast<PlatBio*>(menu.listePlats_[i])->getEcoTaxe()));
+                    break;
+            }
 	}
 	return *this;
 }
@@ -217,10 +250,12 @@ Plat * Menu::trouverPlatMoinsCher() const
 
 }
 
-Plat* Menu::trouverPlat(const string& nom) const {
+Plat* Menu::trouverPlat(const string& nom) const
+{
 	for (int i = 0; i < listePlats_.size(); ++i) {
 		if (listePlats_[i]->getNom() == nom)
 			return listePlats_[i]; 
 	}
 	return nullptr; 
 }
+

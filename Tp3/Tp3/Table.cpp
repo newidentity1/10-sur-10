@@ -115,15 +115,15 @@ ostream& operator<<(ostream& os, const Table& table)
         
         switch (table.clientPrincipal_->getStatut()) {
             case Occasionnel:
-                os << (*(table.clientPrincipal_));
+                os << (*(table.clientPrincipal_)) << endl;
                 break;
                 
             case Fidele:
-                os << *(static_cast<ClientRegulier*>(table.clientPrincipal_));
+                os << *(static_cast<ClientRegulier*>(table.clientPrincipal_)) << endl;
                 break;
                 
             case Prestige:
-                os << *(static_cast<ClientPrestige*>(table.clientPrincipal_));
+                os << *(static_cast<ClientPrestige*>(table.clientPrincipal_)) << endl;
                 break;
         }
                 if (!table.commande_.empty())
