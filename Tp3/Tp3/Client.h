@@ -16,7 +16,7 @@ enum StatutClient {Occasionnel, Fidele,Prestige };
 class Client{
 public:
 	Client();
-	Client(const string& nom,string prenom,int tailleGroupe);
+	Client(string nom,string prenom,int tailleGroupe);
 	~Client() = default;
 
 // Accesseurs

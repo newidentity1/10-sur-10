@@ -65,21 +65,35 @@ ostream& operator<<(ostream& os, const Menu& menu)
 	return os;
 }
 
+Menu& Menu::operator+=(const Plat& plat) {
+    
+   // switch (plat.getType()) {
+        //case Regulier:
+            listePlats_.push_back(new Plat(plat));
+           // break;
+            
+       /* case Bio:
+            listePlats_.push_back(new PlatBio(plat));
+            break;
+    }*/
+    return *this;
+}
 
 
 Menu& Menu::operator+=(const PlatBio& plat) {
     
-    switch (plat.getType()) {
-        case Regulier:
-            listePlats_.push_back(new Plat(plat));
-            break;
+   // switch (plat.getType()) {
+        //case Regulier:
+           // listePlats_.push_back(new Plat(plat));
+           // break;
             
-        case Bio:
+        //case Bio:
             listePlats_.push_back(new PlatBio(plat));
-            break;
-    }
+           // break;
+   // }
 	return *this;
 }
+
 
 
 Menu & Menu::operator=(const Menu & menu)

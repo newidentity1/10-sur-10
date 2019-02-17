@@ -12,11 +12,11 @@
 		21E7FC812216479C006DCC76 /* clientPrestige.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E7FC6F2216478A006DCC76 /* clientPrestige.cpp */; };
 		21E7FC822216479C006DCC76 /* client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E7FC722216478C006DCC76 /* client.cpp */; };
 		21E7FC832216479C006DCC76 /* Table.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E7FC762216478F006DCC76 /* Table.cpp */; };
-		21E7FC842216479C006DCC76 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E7FC772216478F006DCC76 /* main.cpp */; };
 		21E7FC852216479C006DCC76 /* clientRegulier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E7FC7822164790006DCC76 /* clientRegulier.cpp */; };
 		21E7FC862216479C006DCC76 /* PlatCustom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E7FC7B22164798006DCC76 /* PlatCustom.cpp */; };
 		21E7FC872216479C006DCC76 /* PlatBio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E7FC7C22164799006DCC76 /* PlatBio.cpp */; };
 		21E7FC882216479C006DCC76 /* Plat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E7FC7D2216479A006DCC76 /* Plat.cpp */; };
+		21E7FC8A2218DE4D006DCC76 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E7FC892218DE4D006DCC76 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,7 +45,6 @@
 		21E7FC742216478D006DCC76 /* ClientPrestige.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientPrestige.h; sourceTree = "<group>"; };
 		21E7FC752216478E006DCC76 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
 		21E7FC762216478F006DCC76 /* Table.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Table.cpp; sourceTree = "<group>"; };
-		21E7FC772216478F006DCC76 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "../../../../../Downloads/Fichiers 2/main.cpp"; sourceTree = "<group>"; };
 		21E7FC7822164790006DCC76 /* clientRegulier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = clientRegulier.cpp; sourceTree = "<group>"; };
 		21E7FC7922164797006DCC76 /* Plat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plat.h; sourceTree = "<group>"; };
 		21E7FC7A22164797006DCC76 /* Restaurant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Restaurant.h; sourceTree = "<group>"; };
@@ -53,6 +52,7 @@
 		21E7FC7C22164799006DCC76 /* PlatBio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlatBio.cpp; sourceTree = "<group>"; };
 		21E7FC7D2216479A006DCC76 /* Plat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plat.cpp; sourceTree = "<group>"; };
 		21E7FC7E2216479A006DCC76 /* Table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Table.h; sourceTree = "<group>"; };
+		21E7FC892218DE4D006DCC76 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,8 +91,8 @@
 				21E7FC742216478D006DCC76 /* ClientPrestige.h */,
 				21E7FC7822164790006DCC76 /* clientRegulier.cpp */,
 				21E7FC6E22164789006DCC76 /* ClientRegulier.h */,
-				21E7FC772216478F006DCC76 /* main.cpp */,
 				21E7FC6C22164787006DCC76 /* Menu.cpp */,
+				21E7FC892218DE4D006DCC76 /* main.cpp */,
 				21E7FC712216478B006DCC76 /* Menu.h */,
 				21E7FC7D2216479A006DCC76 /* Plat.cpp */,
 				21E7FC7922164797006DCC76 /* Plat.h */,
@@ -167,13 +167,13 @@
 			files = (
 				21E7FC812216479C006DCC76 /* clientPrestige.cpp in Sources */,
 				21E7FC802216479C006DCC76 /* Menu.cpp in Sources */,
-				21E7FC842216479C006DCC76 /* main.cpp in Sources */,
 				21E7FC862216479C006DCC76 /* PlatCustom.cpp in Sources */,
 				21E7FC882216479C006DCC76 /* Plat.cpp in Sources */,
 				21E7FC822216479C006DCC76 /* client.cpp in Sources */,
 				21E7FC7F2216479C006DCC76 /* Restaurant.cpp in Sources */,
 				21E7FC832216479C006DCC76 /* Table.cpp in Sources */,
 				21E7FC852216479C006DCC76 /* clientRegulier.cpp in Sources */,
+				21E7FC8A2218DE4D006DCC76 /* main.cpp in Sources */,
 				21E7FC872216479C006DCC76 /* PlatBio.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
