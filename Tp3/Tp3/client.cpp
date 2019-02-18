@@ -14,7 +14,7 @@ Client::Client() :
     statut_(Occasionnel)
 {}
 
-Client::Client(string nom, string prenom, int tailleGroupe) :
+Client::Client(const string& nom, string prenom, int tailleGroupe) :
     nom_(nom),
     prenom_(prenom),
     tailleGroupe_(tailleGroupe),

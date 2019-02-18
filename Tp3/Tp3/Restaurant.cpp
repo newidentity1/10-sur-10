@@ -163,6 +163,7 @@ void Restaurant::commanderPlat(const string& nom, int idTable,TypePlat type, int
 	else
 	{
         if (type == Custom){
+            static_cast<PlatCustom*>(plat)->setNbIngredients(nbIngredients);
             tables_[index]->commander(static_cast<PlatCustom*>(plat));
         }else{
             tables_[index]->commander(plat);
@@ -282,14 +283,24 @@ void Restaurant::livrerClient(Client * client, const vector<string>& commande)
 	///vérifier que le client a droit aux livraisons
 	///Si oui lui assigner la table des livraisons 
 	///Effectuer la commande
-    
-    if (client->getStatut() == Prestige)
-    {
-        tables_[INDEX_TABLE_LIVRAISON]->placerClients(1);
-        
-        for (size_t i = 0; i < commande.size(); i++)
-            commanderPlat(commande[i], tables_[INDEX_TABLE_LIVRAISON]->getId());
-    }
+
+	if (client->getStatut() == Prestige)
+	{
+		tables_[INDEX_TABLE_LIVRAISON]->placerClients(1);
+		tables_[INDEX_TABLE_LIVRAISON]->setClientPrincipal(client);
+
+		for (size_t i = 0; i < commande.size(); i++)
+			commanderPlat(commande[i], tables_[INDEX_TABLE_LIVRAISON]->getId());
+		
+		cout << "Livraison en cours..." << endl << endl;
+		cout << "Statut de la table de livraison:(table numero "<< tables_[INDEX_TABLE_LIVRAISON]->getId() << "):" << endl << *tables_[INDEX_TABLE_LIVRAISON];
+		cout << "Livraison terminee" << endl;
+		libererTable(tables_[INDEX_TABLE_LIVRAISON]->getId());
+	}
+	else{
+
+		cout << "Le client " << client->getPrenom() << " " << client->getNom() << " n est pas admissible a la livraison." << endl;
+	}
     
 }
 

@@ -58,40 +58,28 @@ ostream& operator<<(ostream& os, const Menu& menu)
                 break;
             
             case Bio:
-                os << "\t" << static_cast<PlatBio*>(menu.listePlats_[i]);
+				os << "\t" << *(static_cast<PlatBio*>(menu.listePlats_[i]));
                 break;
         }
     }
 	return os;
 }
 
-Menu& Menu::operator+=(const Plat& plat) {
-    
-   // switch (plat.getType()) {
-        //case Regulier:
-            listePlats_.push_back(new Plat(plat));
-           // break;
-            
-       /* case Bio:
-            listePlats_.push_back(new PlatBio(plat));
-            break;
-    }*/
-    return *this;
-}
 
 
 Menu& Menu::operator+=(const PlatBio& plat) {
     
-   // switch (plat.getType()) {
-        //case Regulier:
-           // listePlats_.push_back(new Plat(plat));
-           // break;
-            
-        //case Bio:
-            listePlats_.push_back(new PlatBio(plat));
-           // break;
-   // }
+    
+    listePlats_.push_back(new PlatBio(plat));
+    
+  
 	return *this;
+}
+
+Menu& Menu::operator+=(const Plat& plat) {
+
+	listePlats_.push_back(new Plat(plat));
+		return *this;
 }
 
 

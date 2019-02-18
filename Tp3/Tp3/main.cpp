@@ -16,19 +16,20 @@ int main() {
 
 	//creation du restaurant 
 	Restaurant poly("polyFood.txt", "PolyFood", Soir); 
+	
+	///creer plusieurs clients  
 
-	///creer plusieurs clients
 
 	Client * cl1 = new Client("Martin", "b", 1);
 
 	vector<string> commandeMartin;
 	commandeMartin.push_back("Muffin");
 	commandeMartin.push_back("Poisson");
-    Client * cl2 = new Client("Amy", "wh", 15);
-    Client * cl3 = new ClientRegulier("Jonh", "sm", 5, 25);
-	Client * cl4 = new ClientRegulier("Moussa", "T", 3, 45);
-	Client * cl5 = new ClientPrestige("Andree", "F", 2, 150, Zone2);
-	Client * cl6 = new ClientPrestige("Marie", "C", 1, 125, Zone1);
+	Client * cl2 = new Client("Amy", "wh", 15);
+	Client * cl3 = new ClientRegulier("Jonh", "sm", 5,25);
+	Client * cl4 = new ClientRegulier("Moussa", "T", 3,45);
+	Client * cl5 = new ClientPrestige("Andree", "F", 2,150, Zone2);
+	Client * cl6 = new ClientPrestige("Marie", "C", 1,125, Zone1);
 
 
 
@@ -36,6 +37,12 @@ int main() {
 	cout << "--------------------------------------------------------------------------------------------------" << endl;
 
 	//Livrer les clients Marie et Martins
+	
+	vector<string> commandeMarie;
+	commandeMarie.push_back("Pizza");
+	poly.livrerClient(cl6, commandeMarie);
+
+	poly.livrerClient(cl1, commandeMartin);
 
 	cout << "\t\t\t\t\tPLACEMENT DES CLIENT" << endl;
 	cout << "--------------------------------------------------------------------------------------------------" << endl;

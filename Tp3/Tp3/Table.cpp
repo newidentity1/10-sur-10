@@ -8,15 +8,17 @@
 
 //constructeurs
 Table::Table() :
-    id_(-1),
-    nbPlaces_(1),
-    nbClientsATable_(0)
+	id_(-1),
+	nbPlaces_(1),
+	nbClientsATable_(0),
+	clientPrincipal_(nullptr)
 {}
 
 Table::Table(int id, int nbPlaces) :
     id_(id),
     nbPlaces_(nbPlaces),
-    nbClientsATable_(0)
+    nbClientsATable_(0),
+	clientPrincipal_(nullptr)
 {}
 
 //getters
