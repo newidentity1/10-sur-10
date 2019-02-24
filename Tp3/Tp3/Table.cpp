@@ -1,7 +1,7 @@
 /*
 * Titre : Table.cpp - Travail Pratique #3
-* Date : 11 Février 2019
-* Auteur :Fatou S. MOUNZEO
+* Date : 24 Février 2019
+* Équipe : Estefan Vega-Calcada (1934346) & Yanis Toubal (1960266)
 */
 
 #include "Table.h"
@@ -13,7 +13,7 @@ Table::Table() :
 	nbClientsATable_(0),
 	clientPrincipal_(nullptr)
 {}
-
+//constructeur par parametres 
 Table::Table(int id, int nbPlaces) :
     id_(id),
     nbPlaces_(nbPlaces),
@@ -48,7 +48,7 @@ vector<Plat*> Table::getCommande() const
 	return commande_;
 }
 
-Client* Table::getCliengtPrincipal() const
+Client* Table::getClientPrincipal() const
 {
     return clientPrincipal_;
 }
@@ -88,26 +88,25 @@ double Table::getChiffreAffaire() const {
 	double chiffre = 0.0;
 	
     for (unsigned i = 0; i < commande_.size(); ++i)
-        switch (commande_[i]->getType()) {
-            
-            case (Occasionnel):
-               
+        
+		switch (commande_[i]->getType()) 
+		{ 
+            case (Regulier):
                 chiffre += (commande_[i]->getPrix() - commande_[i]->getCout());
                 break;
             
-            case (Fidele):
+            case (Bio):
                 chiffre += (static_cast<PlatBio*>(commande_[i])->getEcoTaxe() + commande_[i]->getPrix()) - commande_[i]->getCout();
                 break;
             
-            case (Prestige):
+            case (Custom):
                 chiffre += (static_cast<PlatCustom*>(commande_[i])->getSupplement() + commande_[i]->getPrix()) - commande_[i]->getCout();
                 break;
         }
 	return chiffre;
 }
 
-//affichage
-
+//Affichage: surcharge de l'operateur << 
 ostream& operator<<(ostream& os, const Table& table)
 {
 	os << "La table numero " << table.id_;
@@ -128,12 +127,25 @@ ostream& operator<<(ostream& os, const Table& table)
                 os << *(static_cast<ClientPrestige*>(table.clientPrincipal_)) << endl;
                 break;
         }
-                if (!table.commande_.empty())
+		if (!table.commande_.empty())
 		{
 			os << "Voici la commande passee par les clients : " << endl;
+
 			for (unsigned i = 0; i < table.commande_.size(); ++i)
 			{
-				os << "\t" << *table.commande_[i];
+				switch (table.commande_[i]->getType() ) {
+				case Regulier:
+					os << "\t" << (*(table.commande_[i]));
+					break;
+
+				case Bio:
+					os << "\t" << *(static_cast<PlatBio*>(table.commande_[i]));
+					break;
+
+				case Custom:
+					os << "\t" << *(static_cast<PlatCustom*>(table.commande_[i]));
+					break;
+				}
 			}
 		}
 		else

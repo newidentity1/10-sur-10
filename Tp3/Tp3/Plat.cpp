@@ -1,7 +1,7 @@
 /*
 * Titre : Plat.cpp - Travail Pratique #3
-* Date : 18 Janvier 2019
-* Auteur : Allan BEDDOUK
+* Date : 24 Février 2019
+* Équipe : Estefan Vega-Calcada (1934346) & Yanis Toubal (1960266)
 */
 
 #include "Plat.h"
@@ -41,13 +41,13 @@ void Plat::setPrix(double prix) {
 	prix_ = prix; 
 }
 
+// surcharge de l'operateur <, comparaison de prix de plats 
 bool Plat::operator<(const Plat& plat) const 
 {
 	return this->prix_ < plat.prix_;
 }
 
-//autres methodes
-
+// Affichage: surcharge de l'operateur <<  
 ostream& operator<<(ostream& os, const Plat& plat)
 {
 	os << plat.nom_ << " - " << plat.prix_ << " $ (" << plat.cout_ << "$ pour le restaurant)" << endl;

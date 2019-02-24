@@ -1,9 +1,7 @@
-
-
 /*
- * Titre : Plat.cpp - Travail Pratique #3
- * Date : 18 Janvier 2019
- * Auteur : Allan BEDDOUK
+ * Titre : PlatCustom.cpp - Travail Pratique #3
+* Date : 24 Février 2019
+* Équipe : Estefan Vega-Calcada (1934346) & Yanis Toubal (1960266)
  */
 
 
@@ -15,6 +13,7 @@ PlatCustom::PlatCustom(string nom, double prix, double cout, int nbIngredients) 
     nbIngredients_(nbIngredients),
     Plat(nom, prix, cout)
 {
+	type_ = Custom;
     supplement_ = calculerSupplement();
 }
 //getters
@@ -35,15 +34,16 @@ void PlatCustom::setNbIngredients(int nIngredients)
     nbIngredients_ = nIngredients;
 }
 
-//autres methodes
-
+// calcule les frais additionnels qui s'ajoutent lors de l'ajout
+// d'ingredients a un plat 
 double PlatCustom::calculerSupplement() const
 {
     return (nbIngredients_ * FRAIS_CUSTOMISATION);
 }
 
+// Affichage : surcharge de l'operateur << 
 ostream& operator<<(ostream& os, const PlatCustom& plat)
 {
-    os << static_cast<Plat>(plat)<< endl << " contient" << plat.getNbIngredients() << "elements modifies pour un supplement total de :" << plat.getSupplement() << "$" << endl;
+	os << static_cast<Plat>(plat) << "\t contient " << plat.getNbIngredients() << " elements modifies pour un supplement total de :" << plat.getSupplement() << "$" << endl;
     return os;
 }

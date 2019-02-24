@@ -1,20 +1,20 @@
 /*
 * Titre : main.cpp - Travail Pratique #3
-* Date : 11 Février 2019 
-* Auteur : Fatou S. Mounzeo
+* Date : 24 Février 2019
+* Équipe : Estefan Vega-Calcada (1934346) & Yanis Toubal (1960266)
 */
 
 #include "Restaurant.h"
 #include "ClientPrestige.h"
 
-
+#include <stdlib.h>  
 using namespace std; 
 
 int main() {
 
-
-
-	//creation du restaurant 
+	
+	
+	//creation g restaurant 
 	Restaurant poly("polyFood.txt", "PolyFood", Soir); 
 	
 	///creer plusieurs clients  
@@ -25,6 +25,7 @@ int main() {
 	vector<string> commandeMartin;
 	commandeMartin.push_back("Muffin");
 	commandeMartin.push_back("Poisson");
+	
 	Client * cl2 = new Client("Amy", "wh", 15);
 	Client * cl3 = new ClientRegulier("Jonh", "sm", 5,25);
 	Client * cl4 = new ClientRegulier("Moussa", "T", 3,45);
@@ -39,6 +40,7 @@ int main() {
 	//Livrer les clients Marie et Martins
 	
 	vector<string> commandeMarie;
+	commandeMarie.push_back("Poutine");
 	commandeMarie.push_back("Pizza");
 	poly.livrerClient(cl6, commandeMarie);
 
@@ -63,7 +65,7 @@ int main() {
 	poly.commanderPlat("Muffin", 4); 
 	poly.commanderPlat("Oeuf", 4); 
 
-
+	
 	//Creation d'une copie du poly restaurant 
 	Restaurant poly2(poly);
 	poly2.setNom("PolyFood2");
@@ -99,5 +101,5 @@ int main() {
 	delete cl3;
 	delete cl4;
 	delete cl5;
-
+	
 }

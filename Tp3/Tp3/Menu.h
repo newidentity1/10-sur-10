@@ -24,6 +24,8 @@ public:
 	///TODO
 	Menu(const Menu& menu); ///A modifier
 
+	//destructeur
+	~Menu();
 
 	//getters
 	vector<Plat*> getListePlats() const; 

@@ -1,7 +1,7 @@
 /*
 * Titre : Menu.cpp - Travail Pratique #3
-* Date : 11 Février 2019
-* Auteur : Fatou S Mounzeo
+* Date : 24 Février 2019
+* Équipe : Estefan Vega-Calcada (1934346) & Yanis Toubal (1960266)
 */
 
 #include "Menu.h"
@@ -12,6 +12,7 @@ Menu::Menu() {
 	type_ = Matin; 
 }
 
+//constructeur par parametre 
 Menu::Menu(string fichier, TypeMenu type) {
 	type_ = type; 
 
@@ -19,6 +20,7 @@ Menu::Menu(string fichier, TypeMenu type) {
 	lireMenu(fichier); 
 }
 
+// Constructeur de copie 
 Menu::Menu(const Menu & menu): type_(menu.type_)
 {
 	///TODO 
@@ -37,6 +39,17 @@ Menu::Menu(const Menu & menu): type_(menu.type_)
 	}
 }
 
+//destructeur
+
+Menu::~Menu() {
+
+	for (unsigned i = 0; i < listePlats_.size(); i++)
+		delete listePlats_[i];
+	
+	listePlats_.clear();
+
+}
+
 
 //getters
 
@@ -45,9 +58,7 @@ vector<Plat*> Menu::getListePlats() const
 	return listePlats_;
 }
 
-//autres methodes 
-
-
+//Affichage: surcharge de l'operateur << 
 ostream& operator<<(ostream& os, const Menu& menu)
 {
 	for (unsigned i = 0; i < menu.listePlats_.size(); ++i) {
@@ -66,16 +77,13 @@ ostream& operator<<(ostream& os, const Menu& menu)
 }
 
 
-
+// Surcharge de l'operateur +=, permet d'ajouter un plat Bio au Menu
 Menu& Menu::operator+=(const PlatBio& plat) {
     
-    
     listePlats_.push_back(new PlatBio(plat));
-    
-  
 	return *this;
 }
-
+// Surcharge de l'operateur : permet d'ajouter un plat au Menu
 Menu& Menu::operator+=(const Plat& plat) {
 
 	listePlats_.push_back(new Plat(plat));
@@ -83,7 +91,8 @@ Menu& Menu::operator+=(const Plat& plat) {
 }
 
 
-
+// Surcharge de l'operateur = , permet d'assigner un nouveau Menu au Menu
+// existant (Ecrase les donnees du menu actuel) (assignation)
 Menu & Menu::operator=(const Menu & menu)
 {
 	///TODO
@@ -110,7 +119,7 @@ Menu & Menu::operator=(const Menu & menu)
 	return *this;
 }
 
-
+// Permet d'initialiser le Menu avec un fichier 
 void Menu::lireMenu(const string& fichier) {
 	ifstream file(fichier, ios::in); 
 
@@ -234,6 +243,7 @@ void Menu::lireMenu(const string& fichier) {
 	}
 }
 
+// Retourne un pointeur vers le Plat le moins cher de Menu
 Plat * Menu::trouverPlatMoinsCher() const
 {
 	Plat minimum(*listePlats_[0]);
@@ -252,9 +262,10 @@ Plat * Menu::trouverPlatMoinsCher() const
 
 }
 
+// Permet de trouver un plat a l'aide de son nom 
 Plat* Menu::trouverPlat(const string& nom) const
 {
-	for (int i = 0; i < listePlats_.size(); ++i) {
+	for (unsigned i = 0; i < listePlats_.size(); ++i) {
 		if (listePlats_[i]->getNom() == nom)
 			return listePlats_[i]; 
 	}

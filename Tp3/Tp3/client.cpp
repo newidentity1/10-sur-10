@@ -1,8 +1,8 @@
 /*
- * Titre : Plat.cpp - Travail Pratique #3
- * Date : 18 Janvier 2019
- * Auteur : Allan BEDDOUK
- */
+* Titre : client.cpp - Travail Pratique #3
+* Date : 24 Février 2019
+* Équipe : Estefan Vega-Calcada (1934346) & Yanis Toubal (1960266)
+*/
 
 
 #include "Client.h"
@@ -13,7 +13,7 @@ Client::Client() :
     prenom_("inconnu"),
     statut_(Occasionnel)
 {}
-
+//constructeur par parametres 
 Client::Client(const string& nom, string prenom, int tailleGroupe) :
     nom_(nom),
     prenom_(prenom),
@@ -42,8 +42,7 @@ string Client::getPrenom() const
     return prenom_;
 }
 
-//autres methodes
-
+// sert a convertir le statut d'un client en un string  
 string Client::convertirStatutString() const
 {
     switch (statut_) {
@@ -59,6 +58,7 @@ string Client::convertirStatutString() const
     }
 }
 
+// Affichage : surcharge de l'operateur << 
 ostream& operator<<(ostream& os, const Client& client)
 {
     os << "Le client principal est:\n\t" << "-" << client.getNom() << " " <<client.getPrenom() << " statut: " <<client.convertirStatutString() << " ";
