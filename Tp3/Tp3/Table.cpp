@@ -22,11 +22,13 @@ Table::Table(int id, int nbPlaces) :
 {}
 
 //getters
-int Table::getId() const {
+int Table::getId() const 
+{
 	return id_;
 }
 
-int Table::getNbPlaces() const {
+int Table::getNbPlaces() const 
+{
 	return nbPlaces_;
 }
 
@@ -35,7 +37,8 @@ bool Table::estOccupee() const
 	return nbClientsATable_!=0;
 }
 
-bool Table::estPleine() const {
+bool Table::estPleine() const 
+{
 	return nbPlaces_ == 0;
 }
 
@@ -53,20 +56,22 @@ Client* Table::getClientPrincipal() const
     return clientPrincipal_;
 }
 
-
 //setters
-void Table::setId(int id) {
+void Table::setId(int id) 
+{
 	id_ = id;
 }
 
 
-void Table::libererTable() {
+void Table::libererTable()
+{
 	nbPlaces_ += nbClientsATable_;
 	nbClientsATable_ = 0;
 	commande_.clear();
 }
 
-void Table::placerClients(int nbClient) {
+void Table::placerClients(int nbClient) 
+{
 	nbPlaces_ -= nbClient;
 	nbClientsATable_ = nbClient;
 }
@@ -77,17 +82,17 @@ void Table::setClientPrincipal(Client* clientPrincipal)
 }
 
 //autres methodes
-void Table::commander(Plat* plat) {
+void Table::commander(Plat* plat) 
+{
 	commande_.push_back(plat);
 }
 
-double Table::getChiffreAffaire() const {
-	///TODO
-	///Modifier pour que le chiffre d'Affaire prenne en compte le type de plat
-	///voir Énoncé
+double Table::getChiffreAffaire() const 
+{
+	
 	double chiffre = 0.0;
 	
-    for (unsigned i = 0; i < commande_.size(); ++i)
+    for (unsigned i = 0; i < commande_.size(); i++)
         
 		switch (commande_[i]->getType()) 
 		{ 

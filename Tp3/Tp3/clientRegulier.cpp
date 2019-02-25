@@ -24,12 +24,10 @@ ClientRegulier::ClientRegulier(string nom, string prenom, int tailleGroupe, int 
 }
 
 //Accesseurs
-
 int ClientRegulier::getNbPoints() const
 {
     return nbPoints_;
 }
-
 
 // Permet d'ajouter un bonus a l'attribut nbPoints_
 void ClientRegulier::augmenterNbPoints(int bonus)

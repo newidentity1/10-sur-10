@@ -20,7 +20,7 @@ class Menu {
 public: 
 	// constructeurs
 	Menu(); 
-	Menu(string fichier, TypeMenu type);
+	Menu(const string& fichier, TypeMenu type);
 	///TODO
 	Menu(const Menu& menu); ///A modifier
 

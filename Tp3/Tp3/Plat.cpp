@@ -9,35 +9,41 @@
 //constructeur 
 
 
-Plat::Plat(string nom , double prix , double cout){
-	nom_ = nom;
-	prix_ = prix; 
-	cout_ = cout; 
-	type_ = Regulier;
-}
-//getters 
+Plat::Plat(string nom , double prix , double cout) :
+	nom_(nom),
+	prix_(prix), 
+	cout_(cout), 
+	type_(Regulier)
+{}
 
-string Plat::getNom() const {
+//getters 
+string Plat::getNom() const 
+{
 	return nom_; 
 }
 
-double Plat::getPrix() const {
+double Plat::getPrix() const 
+{
 	return prix_; 
 }
 
-double Plat::getCout() const {
+double Plat::getCout() const 
+{
 	return cout_; 
 }
+
 TypePlat Plat::getType() const
 {
 	return type_;
 }
 //setters 
-void Plat::setNom(string nom) {
+void Plat::setNom(string nom) 
+{
 	nom_ = nom; 
 }
 
-void Plat::setPrix(double prix) {
+void Plat::setPrix(double prix) 
+{
 	prix_ = prix; 
 }
 

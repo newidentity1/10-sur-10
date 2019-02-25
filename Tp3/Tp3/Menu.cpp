@@ -8,14 +8,12 @@
 
 //constructeurs 
 
-Menu::Menu() {
-	type_ = Matin; 
-}
+Menu::Menu() : type_(Matin)
+{}
 
 //constructeur par parametre 
-Menu::Menu(string fichier, TypeMenu type) {
-	type_ = type; 
-
+Menu::Menu(const string& fichier, TypeMenu type) : type_(type)
+{
 	//lecture du fichier -- creation du menu
 	lireMenu(fichier); 
 }
@@ -23,9 +21,7 @@ Menu::Menu(string fichier, TypeMenu type) {
 // Constructeur de copie 
 Menu::Menu(const Menu & menu): type_(menu.type_)
 {
-	///TODO 
-	///Modifier
-	for (unsigned i = 0; i < menu.listePlats_.size(); ++i)
+	for (unsigned i = 0; i < menu.listePlats_.size(); i++)
 	{
         switch (menu.listePlats_[i]->getType()) {
             case Regulier:
@@ -40,19 +36,15 @@ Menu::Menu(const Menu & menu): type_(menu.type_)
 }
 
 //destructeur
-
-Menu::~Menu() {
-
+Menu::~Menu()
+{
 	for (unsigned i = 0; i < listePlats_.size(); i++)
 		delete listePlats_[i];
 	
 	listePlats_.clear();
-
 }
 
-
 //getters
-
 vector<Plat*> Menu::getListePlats() const
 {
 	return listePlats_;
@@ -61,9 +53,10 @@ vector<Plat*> Menu::getListePlats() const
 //Affichage: surcharge de l'operateur << 
 ostream& operator<<(ostream& os, const Menu& menu)
 {
-	for (unsigned i = 0; i < menu.listePlats_.size(); ++i) {
-		
-        switch (menu.listePlats_[i]->getType()) {
+	for (unsigned i = 0; i < menu.listePlats_.size(); i++) 
+	{
+        switch (menu.listePlats_[i]->getType()) 
+		{
             case Regulier:
                 os << "\t" << *menu.listePlats_[i];
                 break;
@@ -78,14 +71,15 @@ ostream& operator<<(ostream& os, const Menu& menu)
 
 
 // Surcharge de l'operateur +=, permet d'ajouter un plat Bio au Menu
-Menu& Menu::operator+=(const PlatBio& plat) {
-    
-    listePlats_.push_back(new PlatBio(plat));
+Menu& Menu::operator+=(const PlatBio& plat)
+{
+	listePlats_.push_back(new PlatBio(plat));
 	return *this;
 }
-// Surcharge de l'operateur : permet d'ajouter un plat au Menu
-Menu& Menu::operator+=(const Plat& plat) {
 
+// Surcharge de l'operateur : permet d'ajouter un plat au Menu
+Menu& Menu::operator+=(const Plat& plat) 
+{
 	listePlats_.push_back(new Plat(plat));
 		return *this;
 }
@@ -95,17 +89,15 @@ Menu& Menu::operator+=(const Plat& plat) {
 // existant (Ecrase les donnees du menu actuel) (assignation)
 Menu & Menu::operator=(const Menu & menu)
 {
-	///TODO
-	/// A Modifier
 	if (this != &menu)
 	{
-		this->type_ = menu.type_;
+		type_ = menu.type_;
         
-        for (unsigned i = 0; i < menu.listePlats_.size(); ++i)
+        for (unsigned i = 0; i < menu.listePlats_.size(); i++)
            delete listePlats_[i];
         listePlats_.clear();
 
-		for (unsigned i = 0; i < menu.listePlats_.size(); ++i)
+		for (unsigned i = 0; i < menu.listePlats_.size(); i++)
             switch (menu.listePlats_[i]->getType()) {
                 case Regulier:
                     listePlats_.push_back(new Plat(*menu.listePlats_[i]));
@@ -247,9 +239,9 @@ void Menu::lireMenu(const string& fichier) {
 Plat * Menu::trouverPlatMoinsCher() const
 {
 	Plat minimum(*listePlats_[0]);
-	int found = -1;
+	int found = 0;
 
-	for (unsigned i = 0; i < listePlats_.size(); ++i)
+	for (unsigned i = 0; i < listePlats_.size(); i++)
 	{
 		if (*listePlats_[i] < minimum)
 		{
@@ -257,9 +249,7 @@ Plat * Menu::trouverPlatMoinsCher() const
 			found = i;
 		}
 	}
-
 	return listePlats_[found];
-
 }
 
 // Permet de trouver un plat a l'aide de son nom 

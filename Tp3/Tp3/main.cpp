@@ -1,25 +1,20 @@
 /*
 * Titre : main.cpp - Travail Pratique #3
-* Date : 24 Février 2019
+* Date : 24 Février 2019new
 * Équipe : Estefan Vega-Calcada (1934346) & Yanis Toubal (1960266)
 */
 
 #include "Restaurant.h"
 #include "ClientPrestige.h"
 
-#include <stdlib.h>  
 using namespace std; 
 
 int main() {
 
-	
-	
-	//creation g restaurant 
+	//creation du restaurant 
 	Restaurant poly("polyFood.txt", "PolyFood", Soir); 
 	
 	///creer plusieurs clients  
-
-
 	Client * cl1 = new Client("Martin", "b", 1);
 
 	vector<string> commandeMartin;
@@ -32,16 +27,14 @@ int main() {
 	Client * cl5 = new ClientPrestige("Andree", "F", 2,150, Zone2);
 	Client * cl6 = new ClientPrestige("Marie", "C", 1,125, Zone1);
 
-
-
 	cout << "\t\t\t\t\tLIVRAISONS" << endl;
 	cout << "--------------------------------------------------------------------------------------------------" << endl;
 
 	//Livrer les clients Marie et Martins
 	
 	vector<string> commandeMarie;
-	commandeMarie.push_back("Poutine");
 	commandeMarie.push_back("Pizza");
+	
 	poly.livrerClient(cl6, commandeMarie);
 
 	poly.livrerClient(cl1, commandeMartin);
@@ -57,7 +50,6 @@ int main() {
 	poly.placerClients(cl5); 
 
 	// commander des plats 
-
 	poly.commanderPlat("Poisson", 1,Custom,3);
 	poly.commanderPlat("Pizza", 2, Custom,4);
 	poly.commanderPlat("Poulet", 2);
@@ -74,7 +66,6 @@ int main() {
 	cout << poly;
 
 	cout << "--------------------------------------------------------------------------------------------------" << endl;
-
 
 	//liberer les tables et calcule du chiffre d'affaire
 	poly.libererTable(1);
@@ -101,5 +92,6 @@ int main() {
 	delete cl3;
 	delete cl4;
 	delete cl5;
-	
+
+	return 0;
 }
