@@ -1,11 +1,13 @@
 /*
- * Titre : Restaurant.cpp - Travail Pratique #1
- * Date : 01 Fevrier 2019
- * Auteur : Yanis Toubal et Estefan Vega Calcada
- */
+* Titre : Restaurant.cpp - Travail Pratique #1
+* Date : 01 Fevrier 2019
+* Auteur : Yanis Toubal (1960266) et Estefan Vega Calcada (1934346)
+* Description : Ce fichier contient les méthodes implémentées de la classe Restaurant.h qui contient plusieurs tables et 3 types de menus qui contiennent des plats. 
+*/
 
 #include "Restaurant.h"
 
+// Constructeur par défaut 
 Restaurant::Restaurant()
 {
     nom_ = nullptr;
@@ -19,6 +21,7 @@ Restaurant::Restaurant()
     nbTables_ = 0;
 }
 
+// Constructeur par paramètres
 Restaurant::Restaurant(const string& fichier,const string& nom, TypeMenu moment)
 {
     nom_ = new string;
@@ -34,6 +37,7 @@ Restaurant::Restaurant(const string& fichier,const string& nom, TypeMenu moment)
     lireTable(fichier);
 }
 
+// Destructeur, désalloue la mémoire et remet les pointeurs à nullptr
 Restaurant::~Restaurant()
 {
     for (unsigned i = 0; i < nbTables_; i++)
@@ -55,21 +59,26 @@ Restaurant::~Restaurant()
     nom_ = nullptr;
 }
 
+
+// Méthode d'accès, retourne le nom
 string Restaurant::getNom() const
 {
     return *nom_;
 }
 
+// Méthode d'accès, retourne le moment de la journée 
 TypeMenu Restaurant::getMoment() const
 {
     return momentJournee_;
 }
 
+// Méthode de modification, permet de modifier le moment de la journée 
 void Restaurant::setMoment(TypeMenu moment)
 {
     momentJournee_ = moment;
 }
 
+// Méthode qui permet de lire l'onglet Table dans le fichier Polyfood.txt
 void Restaurant::lireTable(const string& fichier)
 {
     ifstream fichierLu(fichier);
@@ -93,6 +102,7 @@ void Restaurant::lireTable(const string& fichier)
     }
 }
 
+// Méthode qui permet d'ajouter une table 
 void Restaurant::ajouterTable(int id, int nbPlaces)
 {
     
@@ -112,6 +122,7 @@ void Restaurant::ajouterTable(int id, int nbPlaces)
     }
 }
 
+// Méthode qui permet de liberer une table et ajuste le chiffre d'affaire
 void Restaurant::libererTable(int id)
 {
     for (unsigned i = 0; i < nbTables_; i++){
@@ -123,7 +134,8 @@ void Restaurant::libererTable(int id)
     }
 }
 
-void Restaurant::commanderPlat(string& nom, int idTable)
+// Méthode qui permet de commander un plat à partir d'un Menu
+void Restaurant::commanderPlat(string nom, int idTable)
 {
     bool idTrouver = false;
     int indexID = -1;
@@ -153,11 +165,13 @@ void Restaurant::commanderPlat(string& nom, int idTable)
     else {
         cout << "Erreur : table non occupee ou plat introuvable" << endl;
     }
+    
 }
 
+// Place un client en vérifiant si la table n'est pas occupée et si le nombre de places est suffisant
 void Restaurant::placerClients(int nbClients)
 {
-    Table meilleurTable(-1, INT_MAX);
+    Table meilleurTable(-1, 99999);
     int indexMeilleurTable = meilleurTable.getId(); // -1
 
     for (unsigned i = 0; i < nbTables_; i++) {
@@ -175,13 +189,14 @@ void Restaurant::placerClients(int nbClients)
         }
 }
 
+// Méthode d'affichage d'un Restaurant
 void Restaurant::afficher() const
 {
     if (chiffreAffaire_ == 0.0) {
         cout << "Le restaurant " << *nom_ << " n'a pas fait de benefice ou le chiffre n'est pas encore calcule." << endl;
     }
     else {
-        cout << "Le restaurant " << *nom_ << " a fait un chiffre d'affaire de : "<< chiffreAffaire_ << " $." << endl;
+        cout << "Le restaurant " << *nom_ << " a fait un chiffre d'affaire de : "<< chiffreAffaire_ << " $."<<endl;
     }
     cout << "Voici les tables :" << endl;
     

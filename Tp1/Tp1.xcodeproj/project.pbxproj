@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21286A2621FB493100252CF2 /* Menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21286A1F21FB493000252CF2 /* Menu.cpp */; };
-		21286A2721FB493100252CF2 /* Plat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21286A2321FB493100252CF2 /* Plat.cpp */; };
-		21286A2821FB493100252CF2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21286A2521FB493100252CF2 /* main.cpp */; };
-		21286A2A21FB495B00252CF2 /* Restaurant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21286A2921FB495B00252CF2 /* Restaurant.cpp */; };
-		214016D22203AAD800FEBA35 /* Table.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 214016D12203AAD800FEBA35 /* Table.cpp */; };
+		21E5A3B0222993A700B6AAD7 /* Table.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E5A3A5222993A600B6AAD7 /* Table.cpp */; };
+		21E5A3B1222993A700B6AAD7 /* Menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E5A3A7222993A600B6AAD7 /* Menu.cpp */; };
+		21E5A3B2222993A700B6AAD7 /* Plat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E5A3A8222993A600B6AAD7 /* Plat.cpp */; };
+		21E5A3B3222993A700B6AAD7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E5A3A9222993A600B6AAD7 /* main.cpp */; };
+		21E5A3B4222993A700B6AAD7 /* Restaurant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21E5A3AE222993A700B6AAD7 /* Restaurant.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,16 +27,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		21286A1F21FB493000252CF2 /* Menu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Menu.cpp; sourceTree = "<group>"; };
-		21286A2021FB493000252CF2 /* Plat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plat.h; sourceTree = "<group>"; };
-		21286A2121FB493000252CF2 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
-		21286A2221FB493000252CF2 /* Restaurant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Restaurant.h; sourceTree = "<group>"; };
-		21286A2321FB493100252CF2 /* Plat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plat.cpp; sourceTree = "<group>"; };
-		21286A2421FB493100252CF2 /* Table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Table.h; sourceTree = "<group>"; };
-		21286A2521FB493100252CF2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		21286A2921FB495B00252CF2 /* Restaurant.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Restaurant.cpp; sourceTree = "<group>"; };
-		214016D12203AAD800FEBA35 /* Table.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Table.cpp; sourceTree = "<group>"; };
 		214016D32204821500FEBA35 /* Tp1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tp1; sourceTree = BUILT_PRODUCTS_DIR; };
+		21E5A3A5222993A600B6AAD7 /* Table.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Table.cpp; sourceTree = "<group>"; };
+		21E5A3A6222993A600B6AAD7 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
+		21E5A3A7222993A600B6AAD7 /* Menu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Menu.cpp; sourceTree = "<group>"; };
+		21E5A3A8222993A600B6AAD7 /* Plat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plat.cpp; sourceTree = "<group>"; };
+		21E5A3A9222993A600B6AAD7 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		21E5A3AA222993A600B6AAD7 /* polyFood.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = polyFood.txt; path = "../../../../../Downloads/TP1_1960266_1934346 4/Tp1/Tp1/polyFood.txt"; sourceTree = "<group>"; };
+		21E5A3AB222993A600B6AAD7 /* Table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Table.h; sourceTree = "<group>"; };
+		21E5A3AC222993A600B6AAD7 /* Plat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plat.h; sourceTree = "<group>"; };
+		21E5A3AD222993A700B6AAD7 /* Questions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Questions.txt; sourceTree = "<group>"; };
+		21E5A3AE222993A700B6AAD7 /* Restaurant.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Restaurant.cpp; sourceTree = "<group>"; };
+		21E5A3AF222993A700B6AAD7 /* Restaurant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Restaurant.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,15 +63,17 @@
 		21286A0D21FB437900252CF2 /* Tp1 */ = {
 			isa = PBXGroup;
 			children = (
-				21286A2521FB493100252CF2 /* main.cpp */,
-				21286A1F21FB493000252CF2 /* Menu.cpp */,
-				21286A2121FB493000252CF2 /* Menu.h */,
-				21286A2321FB493100252CF2 /* Plat.cpp */,
-				21286A2021FB493000252CF2 /* Plat.h */,
-				214016D12203AAD800FEBA35 /* Table.cpp */,
-				21286A2421FB493100252CF2 /* Table.h */,
-				21286A2921FB495B00252CF2 /* Restaurant.cpp */,
-				21286A2221FB493000252CF2 /* Restaurant.h */,
+				21E5A3A9222993A600B6AAD7 /* main.cpp */,
+				21E5A3A7222993A600B6AAD7 /* Menu.cpp */,
+				21E5A3A6222993A600B6AAD7 /* Menu.h */,
+				21E5A3A8222993A600B6AAD7 /* Plat.cpp */,
+				21E5A3AC222993A600B6AAD7 /* Plat.h */,
+				21E5A3AA222993A600B6AAD7 /* polyFood.txt */,
+				21E5A3AD222993A700B6AAD7 /* Questions.txt */,
+				21E5A3AE222993A700B6AAD7 /* Restaurant.cpp */,
+				21E5A3AF222993A700B6AAD7 /* Restaurant.h */,
+				21E5A3A5222993A600B6AAD7 /* Table.cpp */,
+				21E5A3AB222993A600B6AAD7 /* Table.h */,
 			);
 			path = Tp1;
 			sourceTree = "<group>";
@@ -130,11 +134,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21286A2A21FB495B00252CF2 /* Restaurant.cpp in Sources */,
-				21286A2721FB493100252CF2 /* Plat.cpp in Sources */,
-				21286A2621FB493100252CF2 /* Menu.cpp in Sources */,
-				21286A2821FB493100252CF2 /* main.cpp in Sources */,
-				214016D22203AAD800FEBA35 /* Table.cpp in Sources */,
+				21E5A3B4222993A700B6AAD7 /* Restaurant.cpp in Sources */,
+				21E5A3B2222993A700B6AAD7 /* Plat.cpp in Sources */,
+				21E5A3B1222993A700B6AAD7 /* Menu.cpp in Sources */,
+				21E5A3B3222993A700B6AAD7 /* main.cpp in Sources */,
+				21E5A3B0222993A700B6AAD7 /* Table.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

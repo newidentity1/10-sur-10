@@ -1,8 +1,3 @@
-/*
-* Titre : Restaurant.h - Travail Pratique #1
-* Date : 01 Fevrier 2019
-* Auteur : Yanis Toubal et Estefan Vega Calcada
-*/
 
 #ifndef RESTAURANT_H
 #define RESTAURANT_H
@@ -29,7 +24,7 @@ public:
 	void lireTable(const string& fichier); 
 	void ajouterTable(int id, int nbPlaces);
 	void libererTable(int id); 
-	void commanderPlat(string& nom, int idTable);
+	void commanderPlat(string nom, int idTable);
 	void placerClients(int nbClients); 
 
 	//affichage 

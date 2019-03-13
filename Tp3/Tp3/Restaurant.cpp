@@ -384,7 +384,6 @@ double Restaurant::calculerReduction(Client* client, double montant, bool livrai
 {
 	switch (client->getStatut()) 
 	{
-
 		case Occasionnel:
 				return 0.0;
 			break;

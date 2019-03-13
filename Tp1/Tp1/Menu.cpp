@@ -1,11 +1,13 @@
 /*
- * Titre : Menu.cpp - Travail Pratique #1
- * Date : 01 Fevrier 2019
- * Auteur : Yanis Toubal et Estefan Vega Calcada
- */
+* Titre : Menu.cpp - Travail Pratique #1
+* Date : 01 Fevrier 2019
+* Auteur : Yanis Toubal et Estefan Vega Calcada (1934346)
+* Description : Ce fichier contient les méthodes implémentées de la classe Menu.h
+*/
 
 #include "Menu.h"
 
+// Constructeur par défaut 
 Menu::Menu()
 {
     capacite_ = MAXPLAT;
@@ -14,6 +16,7 @@ Menu::Menu()
     type_ = Matin;
 }
 
+// Constructeur par paramètres 
 Menu::Menu(const string& fichier, TypeMenu type )
 {
     capacite_ = MAXPLAT;
@@ -23,6 +26,7 @@ Menu::Menu(const string& fichier, TypeMenu type )
     lireMenu(fichier);
 }
 
+// Destructeur de la classe 
 Menu::~Menu()
 {
     for (unsigned i = 0; i < nbPlats_; i++)
@@ -32,10 +36,12 @@ Menu::~Menu()
         listePlats_ = nullptr;
 }
 
+// Méthode d'accès, retourne le nombre de plats 
 int Menu::getNbPlats() const{
     return nbPlats_;
 }
 
+// Méthode permettant de trouver une plat dans la liste de plats 
 Plat* Menu::trouverPlat(const string& nom) const
 {
     for (unsigned i = 0; i < nbPlats_; i++) {
@@ -45,6 +51,7 @@ Plat* Menu::trouverPlat(const string& nom) const
     return nullptr;
 }
 
+// Méthode permettant d'ajouter un plat à la liste de plats à partir d'un plat
 void Menu::ajouterPlat(Plat& plat)
 {
     if (capacite_ == nbPlats_ ) {
@@ -64,6 +71,7 @@ void Menu::ajouterPlat(Plat& plat)
     }
 }
 
+// Méthode permettant d'ajouter un plat à la liste de plats à partir du nom, montant et cout. 
 void Menu::ajouterPlat(const string& nom, double montant, double cout)
 {
     Plat* nouveauPlat = new Plat(nom, montant, cout);
@@ -100,9 +108,10 @@ bool Menu::lireMenu(const string& fichier)
     }
 }
 
+// Méthode d'affichage d'un menu
 void Menu::afficher() const
 {
-    cout << AFFICHER_TYPE_MENU[type_] << " :" << endl;
+    cout << CHOISIR_TYPE_MENU[type_] << " :" << endl;
     
     for (unsigned i = 0; i < nbPlats_; i++)
         listePlats_[i]->afficher();

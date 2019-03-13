@@ -1,9 +1,3 @@
-/*
-* Titre : Menu.h - Travail Pratique #1
-* Date : 01 Fevrier 2019
-* Auteur : Yanis Toubal et Estefan Vega Calcada
-*/
-
 #ifndef MENU_H
 #define MENU_H 
 
@@ -12,7 +6,6 @@
 
 enum TypeMenu{Matin, Midi, Soir};
 const string CHOISIR_TYPE_MENU[3] = {"-MATIN", "-MIDI", "-SOIR"};
-const string AFFICHER_TYPE_MENU[3] = {"Matin", "Midi", "Soir"};
 const int MAXPLAT = 5;
 
 class Menu
@@ -33,7 +26,7 @@ public:
 
 	//methodes en plus
 	Plat* trouverPlat(const string& nom) const;
-	void ajouterPlat(Plat& plat);
+	void ajouterPlat(Plat & plat); 
 	void ajouterPlat(const string& nom, double montant, double cout);
 	bool lireMenu(const string& fichier);
 	

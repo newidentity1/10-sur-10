@@ -67,6 +67,12 @@ void Table::libererTable()
 {
 	nbPlaces_ += nbClientsATable_;
 	nbClientsATable_ = 0;
+	
+	for (unsigned i = 0; i < commande_.size(); i++)
+	{
+		if (commande_[i]->getType() == Custom)
+			delete commande_[i];
+	}
 	commande_.clear();
 }
 
@@ -89,7 +95,6 @@ void Table::commander(Plat* plat)
 
 double Table::getChiffreAffaire() const 
 {
-	
 	double chiffre = 0.0;
 	
     for (unsigned i = 0; i < commande_.size(); i++)

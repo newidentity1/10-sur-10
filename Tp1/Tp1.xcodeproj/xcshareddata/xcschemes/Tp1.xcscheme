@@ -47,7 +47,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Users/yanistoubal/Desktop/INF1010/INF1010TP1/Tp1/Tp1"
+      customWorkingDirectory = "/Users/yanistoubal/Downloads/TP1_1960266_1934346 4/Tp1/Tp1"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
