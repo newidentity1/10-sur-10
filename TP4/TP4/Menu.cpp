@@ -102,26 +102,22 @@ Menu& Menu::operator+=(owner<Plat*> plat)
     {
         listePlats_.push_back(new PlatBioVege(*dynamic_cast<PlatBioVege*>(typePlat)));
         listePlatsVege_.push_back(dynamic_cast<PlatBioVege*>(typePlat));
-         return *this;
     }
    
-    if (auto typePlat = dynamic_cast<PlatBio*>(plat))
+    else if (auto typePlat = dynamic_cast<PlatBio*>(plat))
     {
         listePlats_.push_back(new PlatBio(*dynamic_cast<PlatBio*>(typePlat)));
-         return *this;
     }
     
-    if (auto typePlat = dynamic_cast<PlatVege*>(plat))
+    else if (auto typePlat = dynamic_cast<PlatVege*>(plat))
     {
         listePlats_.push_back(new PlatVege(*dynamic_cast<PlatVege*>(typePlat)));
         listePlatsVege_.push_back(dynamic_cast<PlatVege*>(typePlat));
-         return *this;
     }
     
-    if (auto typePlat = dynamic_cast<Plat*>(plat))
+    else if (auto typePlat = dynamic_cast<Plat*>(plat))
     {
         listePlats_.push_back(new Plat(*typePlat));
-         return *this;
     }
     return *this;
 }
