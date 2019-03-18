@@ -44,7 +44,7 @@ bool Plat::operator < (const Plat& plat) const
 
 void Plat::afficherPlat(ostream & os) const
 {
-    os << "PLAT ----" << nom_ << " - " << prix_ << " (" << "$ pour le restaurant)" << endl;
+    os << "PLAT ----" << nom_ << " - " << prix_ << " (" <<cout_ << "$ pour le restaurant)" << endl;
 }
 
 double Plat::getPrixRevient()

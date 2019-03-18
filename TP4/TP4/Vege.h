@@ -19,7 +19,7 @@ public:
 	void setVitamines(double vitamines);
 	void setProteines(double proteines);
 	void setMineraux(double mineraux);
-    void afficherVege(ostream & os)const; // TODO
+    virtual void afficherVege(ostream & os)const; // TODO
     virtual double calculerApportNutritif() const = 0;//TODO
 
 protected: 

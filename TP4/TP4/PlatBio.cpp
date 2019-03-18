@@ -35,5 +35,6 @@ double PlatBio:: getPrixDeRevient()
 void PlatBio::afficherPlat(ostream& os) const
 {
     //TODO
-    os <<"Plat bio\t comprend une Taxe ecologique de : " << ecoTaxe_ <<"$" << endl;
+    Plat::afficherPlat(os);
+    os <<"Plat Bio\t comprend une Taxe ecologique de : " << ecoTaxe_ <<"$" << endl;
 }

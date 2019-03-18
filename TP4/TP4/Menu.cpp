@@ -62,7 +62,7 @@ listePlatsVege_(menu.listePlatsVege_)
             listePlats_.push_back(typePlat->clone());
             continue;
         }
-	
+        
     }
 }
 
@@ -98,28 +98,31 @@ vector<Plat*> Menu::getListePlats() const
 Menu& Menu::operator+=(owner<Plat*> plat)
 {
         //TODO
-    if (auto typePlat = dynamic_cast<Plat*>(plat))
+    if (auto typePlat = dynamic_cast<PlatBioVege*>(plat))
     {
-        listePlats_.push_back(new Plat(*typePlat));
+        listePlats_.push_back(new PlatBioVege(*dynamic_cast<PlatBioVege*>(typePlat)));
+        listePlatsVege_.push_back(dynamic_cast<PlatBioVege*>(typePlat));
+         return *this;
     }
    
     if (auto typePlat = dynamic_cast<PlatBio*>(plat))
     {
         listePlats_.push_back(new PlatBio(*dynamic_cast<PlatBio*>(typePlat)));
-    }
-    
-    if (auto typePlat = dynamic_cast<PlatBioVege*>(plat))
-    {
-        listePlats_.push_back(new PlatBioVege(*dynamic_cast<PlatBioVege*>(typePlat)));
-        listePlatsVege_.push_back(dynamic_cast<PlatBioVege*>(typePlat));
+         return *this;
     }
     
     if (auto typePlat = dynamic_cast<PlatVege*>(plat))
     {
         listePlats_.push_back(new PlatVege(*dynamic_cast<PlatVege*>(typePlat)));
         listePlatsVege_.push_back(dynamic_cast<PlatVege*>(typePlat));
+         return *this;
     }
     
+    if (auto typePlat = dynamic_cast<Plat*>(plat))
+    {
+        listePlats_.push_back(new Plat(*typePlat));
+         return *this;
+    }
     return *this;
 }
 
@@ -181,32 +184,8 @@ Plat* Menu::lirePlatDe(LectureFichierEnSections& fichier)
 ostream& operator<<(ostream& os, const Menu& menu)
 {   
     for (unsigned i = 0; i < menu.listePlats_.size(); i++)
-    {
-        if (auto typePlat = dynamic_cast<Plat*>(menu.listePlats_[i]))
-        {
-            typePlat->afficherPlat(os);
-            continue;
-        }
-        
-        if (auto typePlat = dynamic_cast<PlatBio*>(menu.listePlats_[i]))
-        {
-            typePlat->afficherPlat(os);
-            continue;
-        }
-        
-        if (auto typePlat = dynamic_cast<PlatBioVege*>(menu.listePlats_[i]))
-        {
-           typePlat->afficherPlat(os);
-            continue;
-        }
-        
-        if (auto typePlat = dynamic_cast<PlatVege*>(menu.listePlats_[i]))
-        {
-            typePlat->afficherPlat(os);
-            continue;
-        }
-        
-    }
+        menu.listePlats_[i]->afficherPlat(os);
+    
     os << "\nMENU ENTIEREMENT VEGETARIEN" <<endl;
    
     for (unsigned i = 0; i < menu.listePlatsVege_.size(); i++)

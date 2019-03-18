@@ -52,7 +52,7 @@ string ClientPrestige::getAdressCodeString() const
 double ClientPrestige :: getReduction(const Restaurant & res, double montant , bool estLivraison)
 {   //TODO
     if (estLivraison && nbPoints_ > SEUIL_LIVRAISON_GRATUITE)
-        return -1 * (res.getFraisLivraison(adresse_));
+        return -1 * (montant* TAUX_REDUC_PRESTIGE); //ajouter la livraison gratuite (Restaurant n'inclus pas le prix de livraison!!!)
     else
         return -1 * montant * TAUX_REDUC_PRESTIGE;
 }
