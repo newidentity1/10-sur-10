@@ -24,6 +24,7 @@ int main()
 	Menu* menu1 = new Menu(*poly.getMenu(TypeMenu::Matin));
 	cout << "================Exemple de menu===============" << endl;
 	cout << *menu1;
+    delete menu1; //desallouer lespace de menu1
 	///creer plusieurs clients
    	clients.push_back(new ClientOccasionnel("Martin", "b", 1));
 	clients.push_back(new ClientOccasionnel("Amy", "wh", 15));
@@ -132,5 +133,11 @@ int main()
 	{
 		delete clients[i];
 	}
+    
+    for (size_t i = 0; i < listeTaxable.size(); i++)
+    {
+        delete listeTaxable[i]; //desallouer lespace de listeTable
+    }
+    
 	return 0;
 }

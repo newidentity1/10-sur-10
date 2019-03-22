@@ -14,7 +14,7 @@ Vege(nom, vitamines, proteines, mineraux)
     //TODO
     setTaxe();
 }
-PlatVege::~ PlatVege(){}
+PlatVege::~PlatVege(){}
 
 Plat* PlatVege::clone()const
 { //TODO

@@ -13,6 +13,7 @@ class Taxable
 public:
     virtual void setTaxe () = 0;
     virtual double getTaxe()const = 0;
+    virtual ~Taxable() = default; //besoin d'un destructeur virtuel pour delete le bon element dans le vector de Taxable* dans le main
 };
 
 #endif /* Taxable_h */

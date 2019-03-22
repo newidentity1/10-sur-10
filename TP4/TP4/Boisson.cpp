@@ -13,7 +13,7 @@ Boisson::Boisson (string_view nom, double prix): nom_(nom), prix_(prix)
     setTaxe();
 }
 
-void Boisson::setTaxe ()
+void Boisson::setTaxe()
 {
     taxe_ = 0.12;
 }

@@ -8,7 +8,6 @@ PlatBio::PlatBio(string nom, double prix, double cout, double ecotaxe): Plat(nom
 {
 }
 
-
 PlatBio::~ PlatBio(){}
 
 double PlatBio::getEcoTaxe() const
@@ -24,8 +23,9 @@ void PlatBio::setEcoTaxe(double ecoTaxe)
 //TODO
 Plat * PlatBio:: clone () const
 {
-    Plat* copiePlat = new PlatBio(nom_, prix_, cout_, ecoTaxe_);
-    return copiePlat;
+   // Plat* copiePlat = new PlatBio(nom_, prix_, cout_, ecoTaxe_);
+   // return copiePlat;
+    return (new PlatBio(*this));
 }
 double PlatBio:: getPrixDeRevient()
 {

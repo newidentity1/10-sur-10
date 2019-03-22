@@ -24,7 +24,7 @@ public:
 	void setEcoTaxe(double ecoTaxe);
      virtual void afficherPlat(ostream& os) const; // TODO
      virtual double getPrixDeRevient(); //TODO
-        Plat * clone() const; // TODO
+    virtual Plat * clone() const; // TODO
 protected:
 	double ecoTaxe_;
 

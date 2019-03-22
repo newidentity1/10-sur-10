@@ -17,8 +17,8 @@ class Boisson : public Taxable // TODO
     Boisson (string_view nom, double prix);
     string_view getNom() const;
     double getPrix () const;
-    void setTaxe ();
-    double getTaxe()const;
+    virtual void setTaxe();
+    virtual double getTaxe()const;
 protected:
     string nom_;
     double prix_;

@@ -28,7 +28,8 @@ Menu::~Menu()
     listePlats_.clear();
 }
 
-Plat* Menu::allouerPlat(Plat* plat) {
+Plat* Menu::allouerPlat(Plat* plat)
+{
     return plat->clone();
 }
 
@@ -42,25 +43,21 @@ listePlatsVege_(menu.listePlatsVege_)
         if (auto typePlat = dynamic_cast<PlatVege*>(menu.listePlats_[i]))
         {
             listePlats_.push_back(typePlat->clone());
-            continue;
         }
         
-        if (auto typePlat = dynamic_cast<PlatBioVege*>(menu.listePlats_[i]))
+        else if (auto typePlat = dynamic_cast<PlatBioVege*>(menu.listePlats_[i]))
         {
             listePlats_.push_back(typePlat->clone());
-            continue;
         }
         
-        if (auto typePlat = dynamic_cast<PlatBio*>(menu.listePlats_[i]))
+        else if (auto typePlat = dynamic_cast<PlatBio*>(menu.listePlats_[i]))
         {
             listePlats_.push_back(typePlat->clone());
-            continue;
         }
         
-        if (auto typePlat = dynamic_cast<Plat*>(menu.listePlats_[i]))
+       else if (auto typePlat = dynamic_cast<Plat*>(menu.listePlats_[i]))
         {
             listePlats_.push_back(typePlat->clone());
-            continue;
         }
         
     }
@@ -78,8 +75,8 @@ Menu & Menu::operator=(const Menu & menu)
        
         listePlats_.clear();
         
-        for (unsigned i = 0; i < listePlats_.size(); i++)
-           listePlats_.push_back(menu.listePlats_[i]->clone());
+        for (unsigned i = 0; i < menu.listePlats_.size(); i++)
+           listePlats_.push_back(allouerPlat(menu.listePlats_[i]));
         
         type_ = menu.type_;
     }
@@ -100,24 +97,24 @@ Menu& Menu::operator+=(owner<Plat*> plat)
         //TODO
     if (auto typePlat = dynamic_cast<PlatBioVege*>(plat))
     {
-        listePlats_.push_back(new PlatBioVege(*dynamic_cast<PlatBioVege*>(typePlat)));
+        listePlats_.push_back((dynamic_cast<PlatBioVege*>(typePlat)));
         listePlatsVege_.push_back(dynamic_cast<PlatBioVege*>(typePlat));
     }
    
     else if (auto typePlat = dynamic_cast<PlatBio*>(plat))
     {
-        listePlats_.push_back(new PlatBio(*dynamic_cast<PlatBio*>(typePlat)));
+        listePlats_.push_back(dynamic_cast<PlatBio*>(typePlat));
     }
     
     else if (auto typePlat = dynamic_cast<PlatVege*>(plat))
     {
-        listePlats_.push_back(new PlatVege(*dynamic_cast<PlatVege*>(typePlat)));
+        listePlats_.push_back(dynamic_cast<PlatVege*>(typePlat));
         listePlatsVege_.push_back(dynamic_cast<PlatVege*>(typePlat));
     }
     
     else if (auto typePlat = dynamic_cast<Plat*>(plat))
     {
-        listePlats_.push_back(new Plat(*typePlat));
+        listePlats_.push_back(typePlat);
     }
     return *this;
 }
@@ -149,6 +146,7 @@ Plat* Menu::trouverPlat(string_view nom) const
 
 	return nullptr; 
 }
+
 Plat* Menu::lirePlatDe(LectureFichierEnSections& fichier)
 {
     auto lectureLigne = fichier.lecteurDeLigne();
@@ -172,7 +170,6 @@ Plat* Menu::lirePlatDe(LectureFichierEnSections& fichier)
         default:
             return new Plat{nom, prix, coutDeRevient};
     }
-    
 }
 
 // Fonctions globales.

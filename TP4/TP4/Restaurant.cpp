@@ -79,6 +79,13 @@ void Restaurant::libererTable(int id)
 	if (Table* table = getTable(id)) {
 		chiffreAffaire_ += table->getChiffreAffaire(); 
 		chiffreAffaire_ += calculerReduction(table->getClientPrincipal(), table->getChiffreAffaire(), id == tables_[INDEX_TABLE_LIVRAISON]->getId());
+        
+        if (id == tables_[INDEX_TABLE_LIVRAISON]->getId())
+        {
+         ClientPrestige* clientTemp = static_cast<ClientPrestige*>(
+             tables_[INDEX_TABLE_LIVRAISON]->getClientPrincipal());
+         chiffreAffaire_+= getFraisLivraison(clientTemp->getAdresseCode()); //prendre en compte les frais de livraison dans le chifre daffaire
+        }
 		table->libererTable(); 
 	}
 }
