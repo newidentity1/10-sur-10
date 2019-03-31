@@ -96,7 +96,7 @@ Plat* GestionnairePlats::trouverPlatMoinsCher() const
 {
     if (!conteneur_.empty())
     {
-    return  min_element(*conteneur_.begin(), *conteneur_.end(), FoncteurPlatMoinsCher()).second;
+    return  min_element(conteneur_.begin(), conteneur_.end(), FoncteurPlatMoinsCher())->second;
     }
     return nullptr;
 }
@@ -105,10 +105,10 @@ Plat* GestionnairePlats::trouverPlatPlusCher() const
 {
     if (!conteneur_.empty())
     {
-    return max_element(*conteneur_.begin(), *conteneur_.end(),
-        [](const Plat& platGauche, const Plat& platDroit) {
-            return platGauche.getPrix() < platDroit.getPrix();
-        }).second;
+    return max_element(conteneur_.begin(), conteneur_.end(),
+        [](const pair<string, Plat*>& platGauche, const pair<string, Plat*>& platDroit) {
+            return platGauche.second->getPrix() < platDroit.second->getPrix();
+        })->second;
     }
     return nullptr;
 }
@@ -134,7 +134,7 @@ vector<pair<string, Plat*>> GestionnairePlats::getPlatsEntre(double borneInf, do
    
     while(it != conteneur_.end())
     {
-        if (foncteur(*it->second))
+        if (foncteur(*it))
             platDansIntervalle.push_back(*it);
         it++;
     }

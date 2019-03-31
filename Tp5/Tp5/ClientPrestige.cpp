@@ -54,7 +54,7 @@ double ClientPrestige::getReduction(const Restaurant & res, double montant, bool
 	double reduction = 0;
 	reduction = (-montant * TAUX_REDUC_PRESTIGE);
 	if (getNbPoints() < SEUIL_LIVRAISON_GRATUITE && estLivraison)
-		reduction += res.getFraisLivraison(static_cast<int>(adresse_));
+		reduction += res.getFraisLivraison(adresse_);
 
 	return reduction;
 }

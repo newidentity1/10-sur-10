@@ -13,9 +13,14 @@
 class FoncteurPlatMoinsCher
 { // TODO
 public:
-    bool operator()(const Plat& platGauche,const Plat& platDroit) const
+//    bool operator()(const Plat& platGauche,const Plat& platDroit) const
+//    {
+//        return (platGauche.getPrix() < platDroit.getPrix());
+//    }
+    
+    bool operator()(const pair<string, Plat*>& platGauche,const pair<string, Plat*>&  platDroit) const
     {
-        return (platGauche.getPrix() < platDroit.getPrix());
+        return (platGauche.second->getPrix() < platDroit.second->getPrix());
     }
 
 };
@@ -27,9 +32,10 @@ public:
     FoncteurIntervalle(double borneInf, double borneSup) :
     borneInf_(borneInf), borneSup_(borneSup) {};
     
-    bool operator()(const Plat& plat) const
+    bool operator()(const pair<string, Plat*>& plat) const
     {
-        return (plat.getPrix() >= borneInf_ && plat.getPrix() <= borneSup_);
+        return (plat.second->getPrix() >= borneInf_ &&
+                plat.second->getPrix() <= borneSup_);
     }
     
 private:
@@ -37,5 +43,3 @@ private:
     double borneSup_;
     
 };
-
-*

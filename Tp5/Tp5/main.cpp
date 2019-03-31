@@ -18,7 +18,7 @@ int main()
 	//initDebogageMemoire();
 
 	vector<bool> tests;
-	Restaurant poly("polyfood.txt", "PolyFood", TypeMenu::Soir);
+	Restaurant poly("polyFood.txt", "PolyFood", TypeMenu::Soir);
 
 	// Test 1 - Initialisations des gestionnaires de plats
 	tests.push_back((poly.getMenu(TypeMenu::Matin)->getType() == TypeMenu::Matin)

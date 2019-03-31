@@ -18,7 +18,7 @@ class GestionnaireGenerique
 public:
 	C getConteneur() const; //TODO
 	void ajouter(T t);//TODO
-	int getNombreElements() const;//TODO
+	size_t getNombreElements() const;//TODO
 
 protected:
 	C conteneur_;
@@ -37,7 +37,7 @@ void GestionnaireGenerique<T, C>::ajouter(T t)
 }
 
 template<typename T, typename C>
-int GestionnaireGenerique<T, C>::getNombreElements() const
+size_t GestionnaireGenerique<T, C>::getNombreElements() const
 {
     return conteneur_.size();
 }
