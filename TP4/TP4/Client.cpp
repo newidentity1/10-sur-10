@@ -1,8 +1,9 @@
+//
 /*
-* Date : 25 février 2019
-* Auteur : AbdeB
-*/
-
+ * Titre : Client.cpp - Travail Pratique #4
+ * Date : 25 Mars 2019
+ * ƒquipe : Estefan Vega-Calcada (1934346) & Yanis Toubal (1960266)
+ */
 #include "Client.h"
 
 Client::Client()

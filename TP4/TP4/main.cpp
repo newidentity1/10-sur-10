@@ -1,7 +1,9 @@
+//
 /*
-* Date : 25 février 2019
-* Auteur : AbdeB
-*/
+ * Titre : main.cpp - Travail Pratique #4
+ * Date : 25 Mars 2019
+ * ƒquipe : Estefan Vega-Calcada (1934346) & Yanis Toubal (1960266)
+ */
 
 #include "Restaurant.h"
 #include "ClientOccasionnel.h"
@@ -16,7 +18,7 @@ using namespace std;
 
 int main()
 {
-	//initDebogageMemoire();
+	initDebogageMemoire();
     
 	vector<pair<string, bool>> tests;
 	vector<Client*> clients;
@@ -25,6 +27,7 @@ int main()
 	cout << "================Exemple de menu===============" << endl;
 	cout << *menu1;
     delete menu1; //desallouer lespace de menu1
+    
 	///creer plusieurs clients
    	clients.push_back(new ClientOccasionnel("Martin", "b", 1));
 	clients.push_back(new ClientOccasionnel("Amy", "wh", 15));
@@ -136,7 +139,7 @@ int main()
     
     for (size_t i = 0; i < listeTaxable.size(); i++)
     {
-        delete listeTaxable[i]; //desallouer lespace de listeTable
+        delete listeTaxable[i]; //desallouer lespace de listeTaxable
     }
     
 	return 0;

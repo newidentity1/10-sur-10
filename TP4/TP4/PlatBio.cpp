@@ -1,7 +1,9 @@
+//
 /*
-* Date : 25 février 2019
-* Auteur : AbdeB
-*/
+ * Titre : PlatBio.cpp - Travail Pratique #4
+ * Date : 25 Mars 2019
+ * ƒquipe : Estefan Vega-Calcada (1934346) & Yanis Toubal (1960266)
+ */
 #include "PlatBio.h"
 
 PlatBio::PlatBio(string nom, double prix, double cout, double ecotaxe): Plat(nom, prix, cout), ecoTaxe_(ecotaxe)

@@ -1,25 +1,21 @@
-//
 /*
- * Titre : Table.cpp - Travail Pratique #4
- * Date : 25 Mars 2019
- * ƒquipe : Estefan Vega-Calcada (1934346) & Yanis Toubal (1960266)
- */
+* Date : 25 février 2019
+* Auteur : AbdeB
+*/
+
 #include "Table.h"
 using namespace std;
 
-// Constructeurs.
-
+// Constructeurs
 Table::Table(int id, int nbPlaces) :
-	id_{id},
-	nbPlaces_{nbPlaces},
-	nbClientsATable_{0},
-	clientPrincipal_{nullptr}
+	id_{ id },
+	nbPlaces_{ nbPlaces },
+	nbClientsATable_{ 0 },
+	clientPrincipal_{ nullptr }
 {
 }
 
-
 // Getters.
-
 int Table::getId() const
 {
 	return id_;
@@ -83,7 +79,6 @@ void Table::placerClients(int nbClient)
 
 
 // Autres methodes.
-
 void Table::commander(Plat* plat)
 {
 	commande_.push_back(plat);
@@ -93,7 +88,7 @@ double Table::getChiffreAffaire() const
 {
 	double chiffre = 0;
 	for (unsigned i = 0; i < commande_.size(); ++i)
-        chiffre += commande_[i]->getPrixRevient();
+		chiffre += commande_[i]->getPrixRevient();
 	return chiffre;
 }
 
@@ -103,7 +98,7 @@ ostream& operator<<(ostream& os, const Table& table)
 	os << "La table numero " << table.id_;
 	if (table.estOccupee()) {
 		os << " est occupee. Le client principal est:" << endl;
-        os<< table.getClientPrincipal()->getNom()<< endl;;
+		os << table.getClientPrincipal()->getNom() << endl;;
 
 		if (!table.commande_.empty()) {
 			os << "Voici la commande passee par les clients :" << endl;

@@ -1,10 +1,10 @@
 //
-//  Boisson.cpp
-//  intra
-//
-//  Created by Martine Bellaiche on 2019-03-10.
-//  Copyright © 2019 Martine Bellaiche. All rights reserved.
-//
+/*
+ * Titre : Boisson.cpp - Travail Pratique #4
+ * Date : 25 Mars 2019
+ * Équipe : Estefan Vega-Calcada (1934346) & Yanis Toubal (1960266)
+ */
+
 
 #include "Boisson.h"
 // TODO
@@ -12,6 +12,8 @@ Boisson::Boisson (string_view nom, double prix): nom_(nom), prix_(prix)
 {// TODO
     setTaxe();
 }
+
+Boisson::~Boisson(){}
 
 void Boisson::setTaxe()
 {

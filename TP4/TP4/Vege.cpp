@@ -1,7 +1,9 @@
+//
 /*
-* Date : 25 février 2019
-* Auteur : AbdeB
-*/
+ * Titre : Vege.cpp - Travail Pratique #4
+ * Date : 25 Mars 2019
+ * ƒquipe : Estefan Vega-Calcada (1934346) & Yanis Toubal (1960266)
+ */
 #include "Vege.h"
 
 Vege::Vege(string nom, double vitamines, double proteines, double mineraux): nom_(nom),vitamines_(vitamines), proteines_(proteines), mineraux_(mineraux)

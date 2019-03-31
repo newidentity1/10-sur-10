@@ -40,9 +40,9 @@ string LectureFichierEnSections::lireLigne()
 {
 	string ligne;
 	//? Puisqu'on hérite de ifstream, si on écrit juste "getline" ça va tenter d'utiliser celui dans "istream", il faut donc faire "::getline" pour appeler la version globale.
-    //std::getline(*this, ligne,'\r');//pour mac
-    std::getline(*this, ligne); // pour windows
-    //(*this)>> ligne;
+    std::getline(*this, ligne,'\r');//pour mac
+   // std::getline(*this, ligne); // pour windows
+   
 	return ligne;
 }
 

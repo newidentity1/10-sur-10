@@ -7,23 +7,24 @@
 
 #ifndef BOISSON_h
 #define BOISSON_h
+
 #include "Taxable.h"
 #include <string>
 #include <string_view>
+
 using namespace std;
-class Boisson : public Taxable // TODO
+class Boisson : public Taxable
 {
- public:
-    Boisson (string_view nom, double prix);
-    string_view getNom() const;
-    virtual ~Boisson();
-    double getPrix () const;
-    virtual void setTaxe();
-    virtual double getTaxe()const;
+public:
+	Boisson(string_view nom, double prix);
+	virtual void setTaxe();
+	virtual double getTaxe() const;
+	string_view getNom() const;
+	double getPrix() const;
 protected:
-    string nom_;
-    double prix_;
-    double taxe_;
+	string nom_;
+	double prix_;
+	double taxe_;
 };
 
 
