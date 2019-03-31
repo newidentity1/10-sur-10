@@ -12,6 +12,8 @@
 
 #include <set>
 
+using namespace std;
+
 class GestionnaireTables : public GestionnaireGenerique<Table*, set<Table*>> // TODO : Ajouter l'héritage
 {
 public:

@@ -10,7 +10,7 @@
 #include "PlatVege.h"
 #include "PlatBioVege.h"
 
-
+using namespace std;
 
 void GestionnairePlats::lirePlats(const string& nomFichier, TypeMenu type)
 {

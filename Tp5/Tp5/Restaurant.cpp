@@ -22,7 +22,8 @@ Restaurant::Restaurant(const string& nomFichier, string_view nom, TypeMenu momen
 	menuMatin_{new GestionnairePlats{nomFichier, TypeMenu::Matin}},
 	menuMidi_ {new GestionnairePlats{nomFichier, TypeMenu::Midi }},
 	menuSoir_ {new GestionnairePlats{nomFichier, TypeMenu::Soir }},
-	fraisLivraison_{}
+	fraisLivraison_{},
+    tables_{new GestionnaireTables}
 {
 	//lireTables(nomFichier);
     tables_->lireTables(nomFichier);
@@ -35,6 +36,7 @@ Restaurant::~Restaurant()
 	delete menuMatin_;
 	delete menuMidi_;
 	delete menuSoir_;
+    delete tables_;
     //delete les tables
 }
 
@@ -154,12 +156,17 @@ bool Restaurant::placerClients(Client* client)
 	//TODO : trouver la table la plus adaptée pour le client.
     Table* meilleurTable = tables_->getMeilleureTable(tailleGroupe);
 	//TODO : Si possible assigner la table au client sinon retourner false.
+    if (meilleurTable != nullptr)
+    {
     meilleurTable->placerClients(tailleGroupe);
-    if(meilleurTable->estOccupee() &&
-       meilleurTable->getNbClientsATable() == tailleGroupe)
+    meilleurTable->setClientPrincipal(client);
+    client->setTable(meilleurTable);
         return true;
-     else
+    }
+    else
+    {
          return false;
+    }
 }
 
 bool Restaurant::livrerClient(Client* client, const vector<string>& commande)
@@ -177,7 +184,7 @@ bool Restaurant::livrerClient(Client* client, const vector<string>& commande)
 		for (unsigned int i = 0; i < commande.size(); i++)
 			commanderPlat(commande[i], INDEX_TABLE_LIVRAISON);
 		// Liberer la table fictive.
-		libererTable(INDEX_TABLE_LIVRAISON);
+		libererTable(ID_TABLE_LIVRAISON);
 		return true;
 	}
 	else {

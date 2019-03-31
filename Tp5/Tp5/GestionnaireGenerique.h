@@ -12,12 +12,13 @@
 using namespace std;
 //T   = pair<string, Plat*> ou Table*;
 //C   = map<string, Plat*> ou set<Table*>;
+
 template<typename T, typename C>
 class GestionnaireGenerique
 {
 public:
 	C getConteneur() const; //TODO
-	void ajouter(T t);//TODO
+	void ajouter(const T& t);//TODO
 	size_t getNombreElements() const;//TODO
 
 protected:
@@ -31,7 +32,7 @@ C GestionnaireGenerique<T, C>::getConteneur() const
 }
 
 template<typename T, typename C>
-void GestionnaireGenerique<T, C>::ajouter(T t)
+void GestionnaireGenerique<T, C>::ajouter(const T& t)
 {
     conteneur_.insert(t);
 }

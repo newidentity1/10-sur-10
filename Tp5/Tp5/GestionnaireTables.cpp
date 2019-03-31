@@ -48,11 +48,10 @@ Table* GestionnaireTables::getMeilleureTable(int tailleGroupe) const
                 meilleurTable = *it;
                 tableTrouve = true;
             }
-            else if (meilleurTable->getNbPlaces() <= (*it)->getNbPlaces()) //sinon verifie si elle est la meilleur
+            else if (meilleurTable->getNbPlaces() >= (*it)->getNbPlaces()) //sinon verifie si elle est la meilleur
             meilleurTable = *it;
-            
-            it++;
         }
+         it++;
     }
     return meilleurTable; //retourne nullptr si non trouve
 }
