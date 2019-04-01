@@ -18,6 +18,15 @@ void GestionnaireTables::lireTables(const string& nomFichier)
 		ajouter(new Table(id, nbPlaces));
 	}
 }
+GestionnaireTables::~GestionnaireTables()
+{
+	auto it = conteneur_.begin();
+
+	while (it != conteneur_.end()) {
+		delete *it;
+		it++;
+	}
+}
 
 Table* GestionnaireTables::getTable(int id) const
 {

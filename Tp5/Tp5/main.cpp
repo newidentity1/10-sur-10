@@ -155,6 +155,9 @@ int main()
 	// Pour tester l'affichage
 	//cout << poly;
 	
+	for (size_t i = 0; i < clients.size(); i++)
+		delete clients[i];
+
 	return 0;
     
 }
