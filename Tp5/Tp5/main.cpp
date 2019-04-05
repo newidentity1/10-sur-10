@@ -102,10 +102,9 @@ int main()
 
 	//Ne devrait pas pouvoir se faire livrer
 	tests.push_back(!poly.livrerClient(clients[0], commandeMartin));
-
 	//Doit pouvoir se faire livrer
 	tests.push_back(poly.livrerClient(clients[5], commandeMarie));
-
+    
 	// Test 18 - 20 - Commander plat
 	poly.commanderPlat("Pates", clients[0]->getTable()->getId());
 
@@ -153,7 +152,7 @@ int main()
 	}
 
 	// Pour tester l'affichage
-	//cout << poly;
+	cout << poly;
 	
 	for (size_t i = 0; i < clients.size(); i++)
 		delete clients[i];

@@ -49,7 +49,7 @@ public:
 	
     GestionnairePlats* getMenu(TypeMenu typeMenu) const; // TODO: retourner un GestionnairePlats* a la place
 	double getFraisLivraison(int index) const;
-	string getNomTypeMenu(TypeMenu typeMenu);
+	string getNomTypeMenu(TypeMenu typeMenu) const;
 
 	// Autres methodes.
 	void lireAdresses(const string& fichier);

@@ -13,16 +13,10 @@
 class FoncteurPlatMoinsCher
 { // TODO
 public:
-//    bool operator()(const Plat& platGauche,const Plat& platDroit) const
-//    {
-//        return (platGauche.getPrix() < platDroit.getPrix());
-//    }
-    
     bool operator()(const pair<string, Plat*>& platGauche,const pair<string, Plat*>&  platDroit) const
     {
-        return (platGauche.second->getPrix() < platDroit.second->getPrix());
+        return (*(platGauche.second) < *(platDroit.second));
     }
-
 };
 
 class FoncteurIntervalle
