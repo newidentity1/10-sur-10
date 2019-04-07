@@ -28,7 +28,7 @@ public:
 
 	TypeMenu getType() const; // TODO
 
-	Plat* allouerPlat(Plat*); // TODO
+	Plat* allouerPlat(Plat*) const; // TODO
 
 	Plat* trouverPlatMoinsCher() const; // TODO
 	Plat* trouverPlatPlusCher() const; // TODO

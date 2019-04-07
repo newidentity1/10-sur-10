@@ -1,0 +1,3 @@
+1.Oui, il aurait été possible de créer un gestionnaire de client. Pour ce gestionnaire, la meilleure option aurait probablement été une multimap <string nomDuclient, Client* client> avec comme objet des pair<string nomDuclient, Client* client>.
+
+2. Si l'on implémente pas la classe générique dans le .h et qu'on fait appel à une méthode qui n'est pas défini pour le type dans le .cpp, le compilateur générera une erreur en voulant combiner le .h et le fichier cpp dans lequel on appel la classe générique, car il n'aura cette information avant. Tandis que si l'on implémente dans le .h, le compilateur pourra directement voir que la méthode n'est pas défini pour l'objet en question en essayant de compiler le .h.

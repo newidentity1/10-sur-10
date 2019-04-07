@@ -9,7 +9,7 @@
 #include <algorithm>
 #include "Plat.h"
 
-
+//Foncteur qui permet de comparer le prix de 2 plats avec son operateur() qui retourne un booleen
 class FoncteurPlatMoinsCher
 { // TODO
 public:
@@ -19,6 +19,7 @@ public:
     }
 };
 
+//Foncteur qui permet de savoir si le prix d'un plat et dans un intervalle fourni dans le constructeur
 class FoncteurIntervalle
 {
    // TODO

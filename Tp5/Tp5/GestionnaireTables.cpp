@@ -8,6 +8,7 @@
 #include "GestionnaireTables.h"
 #include "LectureFichierEnSections.h"
 
+//Rempli le conteneur de tableau dynamiquement en lisant un fichier texte.
 void GestionnaireTables::lireTables(const string& nomFichier)
 {
 	LectureFichierEnSections fichier{ nomFichier };
@@ -18,6 +19,8 @@ void GestionnaireTables::lireTables(const string& nomFichier)
 		ajouter(new Table(id, nbPlaces));
 	}
 }
+
+//destructeur
 GestionnaireTables::~GestionnaireTables()
 {
 	auto it = conteneur_.begin();
@@ -28,6 +31,7 @@ GestionnaireTables::~GestionnaireTables()
 	}
 }
 
+//Parcours le conteneur en recherchant la table à l'aide de son id. L'a retourne si elle est trouve sinon return nullptr.
 Table* GestionnaireTables::getTable(int id) const
 {
     auto it = conteneur_.begin();
@@ -41,9 +45,9 @@ Table* GestionnaireTables::getTable(int id) const
     return nullptr; // si il ne trouve pas la table
 }
 
+//Parcours le conteneur et compare les tables pour trouver la meilleure. Retourne la meilleure table disponible selon la taille du groupe.
 Table* GestionnaireTables::getMeilleureTable(int tailleGroupe) const
 {
-    
     auto it = conteneur_.begin();
     Table* meilleurTable = nullptr;
     bool tableTrouve = false;
@@ -57,7 +61,7 @@ Table* GestionnaireTables::getMeilleureTable(int tailleGroupe) const
                 meilleurTable = *it;
                 tableTrouve = true;
             }
-            else if (meilleurTable->getNbPlaces() >= (*it)->getNbPlaces()) //sinon verifie si elle est la meilleur
+            else if (meilleurTable->getNbPlaces() >= (*it)->getNbPlaces()) //sinon verifie si elle est la meilleure
             meilleurTable = *it;
         }
          it++;
@@ -65,6 +69,7 @@ Table* GestionnaireTables::getMeilleureTable(int tailleGroupe) const
     return meilleurTable; //retourne nullptr si non trouve
 }
 
+//Parcours le conteneur et affiche toutes les tables en utilisant l'operator << de Table
 void GestionnaireTables::afficherTables(ostream& os) const
 {
     auto it = conteneur_.begin();

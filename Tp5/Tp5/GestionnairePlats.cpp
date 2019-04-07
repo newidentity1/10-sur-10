@@ -12,6 +12,7 @@
 
 using namespace std;
 
+//Rempli le conteneur (map<string,Plat*>) d'un type de menu avec des plats provenant de la section correspodante dans un fichier texte en utilisant lirePlatDe
 void GestionnairePlats::lirePlats(const string& nomFichier, TypeMenu type)
 {
 	LectureFichierEnSections fichier{ nomFichier };
@@ -20,6 +21,7 @@ void GestionnairePlats::lirePlats(const string& nomFichier, TypeMenu type)
 		ajouter(lirePlatDe(fichier));
 }
 
+//Lit les plats dans le fichier texte et initialise dynamiquement le pointeur de base avec le constructeur du type representant le plat lu et retourne le pointeur de base.
 pair<string, Plat*> GestionnairePlats::lirePlatDe(LectureFichierEnSections& fichier)
 {
 	auto lectureLigne = fichier.lecteurDeLigne();
@@ -49,12 +51,13 @@ pair<string, Plat*> GestionnairePlats::lirePlatDe(LectureFichierEnSections& fich
 	return pair<string, Plat*>(plat->getNom(), plat);
 }
 
-
+//Constructeur qui remplit le conteneur en utilisant lirePlats
 GestionnairePlats::GestionnairePlats(const string& nomFichier, TypeMenu type) : type_(type)
 {
     lirePlats(nomFichier, type);
 }
 
+//Constructeur par copie qui prend en paramere un pointeur
 GestionnairePlats::GestionnairePlats(GestionnairePlats* gestionnaire) : type_(gestionnaire->getType())
 {
     auto it = conteneur_.begin();
@@ -62,57 +65,53 @@ GestionnairePlats::GestionnairePlats(GestionnairePlats* gestionnaire) : type_(ge
     while (it != conteneur_.end())
     {
         string copieNomPlat = it->first;
-        Plat* copiePointeurPlat = new Plat(*(it->second));
+        Plat* copiePointeurPlat = allouerPlat(it->second);
         
-        ajouter(pair<string, Plat*>(copieNomPlat, copiePointeurPlat));
+        ajouter(make_pair(copieNomPlat, copiePointeurPlat));
         it++;
     }
 }
 
+//destructeur
 GestionnairePlats::~GestionnairePlats()
 {
     auto it = conteneur_.begin();
     
     while(it != conteneur_.end())
     {
-        delete  it->second;
+        delete it->second;
         it++;
     }
-    
 }
 
+//retourne le type de menu (Matin, Midi, Soir)
 TypeMenu GestionnairePlats::getType() const
 {
     return type_;
 }
 
-Plat* GestionnairePlats::allouerPlat(Plat* plat)
+//Alloue dynamiquement le bon de type en le camouflant dans un pointeur de plat qui est retourne
+Plat* GestionnairePlats::allouerPlat(Plat* plat) const
 {
-    Plat* copiePlat = new Plat(*plat);
-    return copiePlat;
+    return plat->clone();
 }
 
+//Utilise l'algorithme min_element et le foncteur FoncteurPlatMoinsCher pour trouver l'iterateur vers la pair qui contient le plat le moins cher du conteneur. On retourne le pointeur vers ce plat.
 Plat* GestionnairePlats::trouverPlatMoinsCher() const
 {
-    if (!conteneur_.empty())
-    {
     return  min_element(conteneur_.begin(), conteneur_.end(), FoncteurPlatMoinsCher())->second;
-    }
-    return nullptr;
 }
 
+//Utilise l'algorithme max_element et une fonction lambda qui compare le prix de 2 plats pour trouver l'iterateur vers la pair qui contient le plat le plus cher du conteneur. On retourne le pointeur vers ce plat.
 Plat* GestionnairePlats::trouverPlatPlusCher() const
 {
-    if (!conteneur_.empty())
-    {
     return max_element(conteneur_.begin(), conteneur_.end(),
         [](const pair<string, Plat*>& platGauche, const pair<string, Plat*>& platDroit) {
-            return platGauche.second->getPrix() < platDroit.second->getPrix();
+            return (*(platGauche.second) < *(platDroit.second));
         })->second;
-    }
-    return nullptr;
 }
 
+//Parcours le conteneur et recherche a l'aide du nom une correspondance. Si il trouve le nom, retourne le pointeur vers le Plat sinon retourne nullptr.
 Plat* GestionnairePlats::trouverPlat(const string& nom) const
 {
    auto it = conteneur_.begin();
@@ -126,26 +125,24 @@ Plat* GestionnairePlats::trouverPlat(const string& nom) const
     return nullptr; //si le plat nest pas trouve
 }
 
+//utilise l'algorithme copy_if et le foncteur FoncteurIntervalle pour trouver les plats dont les prix sont dans l'intervalle et les ajouter dans le vector platDansIntervalle qui est retourne.
 vector<pair<string, Plat*>> GestionnairePlats::getPlatsEntre(double borneInf, double borneSup)
 {
-    auto it = conteneur_.begin();
     vector<pair<string, Plat*>> platDansIntervalle;
-    FoncteurIntervalle foncteur(borneInf, borneSup);
-   
-    while(it != conteneur_.end())
-    {
-        if (foncteur(*it))
-            platDansIntervalle.push_back(*it);
-        it++;
-    }
+    
+    copy_if(conteneur_.begin(), conteneur_.end(), back_inserter(platDansIntervalle),
+        FoncteurIntervalle(borneInf, borneSup));
+    
     return platDansIntervalle;
 }
 
+//Affiche tous les plats contenus dans le conteneur.
 void GestionnairePlats::afficherPlats(ostream& os) const
 {
     auto it = conteneur_.begin();
     
-    while (it != conteneur_.end()) {
+    while (it != conteneur_.end())
+    {
         it->second->afficherPlat(os);
         it++;
     }

@@ -25,18 +25,21 @@ protected:
 	C conteneur_;
 };
 
+//retourne une copie du conteneur du type generique C
 template<typename T, typename C>
 C GestionnaireGenerique<T, C>::getConteneur() const
 {
     return conteneur_;
 }
 
+//insert un objet du type generique C dans le conteneur du type generique T
 template<typename T, typename C>
 void GestionnaireGenerique<T, C>::ajouter(const T& t)
 {
     conteneur_.insert(t);
 }
 
+//retourne la taille du conteneur du type generique C
 template<typename T, typename C>
 size_t GestionnaireGenerique<T, C>::getNombreElements() const
 {

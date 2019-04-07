@@ -15,6 +15,7 @@ Restaurant::Restaurant() :
 {
 }
 
+//constructeur utilisant un fichier texte pour initialiser les menus, les frais de livraison et les tables
 Restaurant::Restaurant(const string& nomFichier, string_view nom, TypeMenu moment) :
 	nom_{nom},
 	momentJournee_{moment},
@@ -25,7 +26,6 @@ Restaurant::Restaurant(const string& nomFichier, string_view nom, TypeMenu momen
 	fraisLivraison_{},
     tables_{new GestionnaireTables}
 {
-	//lireTables(nomFichier);
     tables_->lireTables(nomFichier);
 	lireAdresses(nomFichier);
 }
@@ -42,43 +42,59 @@ Restaurant::~Restaurant()
 
 // Setters.
 
+//changer le moment de la journee
 void Restaurant::setMoment(TypeMenu moment)
 {
 	momentJournee_ = moment; 
 }
 
+//changer le nom du restaurant
 void Restaurant::setNom(string_view nom)
 {
 	nom_ = nom;
 }
 
+//changer le chiffre d'affaire du resto
  void  Restaurant::setChiffreAffaire( double chiffre)
-{ chiffreAffaire_ = chiffre;
+{
+    chiffreAffaire_ = chiffre;
 }
+
 // Getters.
 
+//retourne le nom du restaurant
 string Restaurant::getNom() const
 {
 	return nom_; 
 }
 
+//retourne le moment de la journee
 TypeMenu Restaurant::getMoment() const
 {
 	return momentJournee_; 
 }
 
+//retourne un pointeur vers le gestionnaire de table
 GestionnaireTables* Restaurant::getTables() const
 {
     return tables_;
 }
 
-double Restaurant::getFraisLivraison(int index) const
+//retourne les frais de livraison selon la zone
+double Restaurant::getFraisLivraison(ZoneHabitation zone) const
 {
-	return fraisLivraison_[index];
+    return fraisLivraison_[static_cast<int>(zone)];
+}
+
+//retourne le chiffre d'affaire actuel du restaurant
+double Restaurant::getChiffreAffaire() const
+{
+    return chiffreAffaire_;
 }
 
 // Autres methodes.
 
+//Libere la table correspondant au id et ajoute son chiffre d'affaire a celui du restaurant.
 void Restaurant::libererTable(int id)
 {
     Table* tableALiberer = tables_->getTable(id);
@@ -86,10 +102,12 @@ void Restaurant::libererTable(int id)
     {
 		chiffreAffaire_ += tableALiberer->getChiffreAffaire();
         chiffreAffaire_ += calculerReduction(tableALiberer->getClientPrincipal(), tableALiberer->getChiffreAffaire(), id == ID_TABLE_LIVRAISON);
-		tableALiberer->libererTable();
+		
+        tableALiberer->libererTable();
 	}
 }
 
+//surcharge d'operateur qui permet d'afficher un restaurant
 ostream& operator<<(ostream& os, const Restaurant& restaurant)
 {
    os << "Le restaurant " << restaurant.getNom();
@@ -109,15 +127,15 @@ ostream& operator<<(ostream& os, const Restaurant& restaurant)
        GestionnairePlats* menuResto = restaurant.getMenu(typeMenu);
        os << restaurant.getNomTypeMenu(typeMenu) << " : " << endl;
        restaurant.getMenu(typeMenu)->afficherPlats(os);
-       os  << "Le plat le moins cher est : ";
+       os << endl << "Le plat le moins cher est : ";
        menuResto->trouverPlatMoinsCher()->afficherPlat(os);
        os << endl;
    }
-    
 	return os;
 }
 
-void Restaurant::commanderPlat(const string& nom, int idTable)
+//Ajoute un plat s'il a ete trouve par son nom dans la commande de la table quon trouve avec son id
+void Restaurant::commanderPlat(const string& nom, int idTable) 
 {
     if (Table* table = tables_->getTable(idTable); table && table->estOccupee())
 		if (Plat* plat = menuActuel()->trouverPlat(nom))
@@ -128,41 +146,44 @@ void Restaurant::commanderPlat(const string& nom, int idTable)
 	cout << "Erreur : table vide ou plat introuvable." << endl << endl;
 }
 
+//surcharge d'operateur qui compare le chiffre d'affaire de 2 restaurant et retourne si le restaurant courant a un chiffre d'affaire plus petit
 bool Restaurant::operator <(const Restaurant& autre) const 
 {
 	return chiffreAffaire_ < autre.chiffreAffaire_;
 }
 
+//Place le client dans la meilleure table et assigne la table au client. Retourne true si le client a bient ete placer sinon retourne false.
 bool Restaurant::placerClients(Client* client)
 {
 	const int tailleGroupe = client->getTailleGroupe();
-	//TODO : trouver la table la plus adaptée pour le client.
+	//trouver la table la plus adaptée pour le client.
     Table* meilleurTable = tables_->getMeilleureTable(tailleGroupe);
-	//TODO : Si possible assigner la table au client sinon retourner false.
+	//Si possible assigner la table au client sinon retourner false.
     if (meilleurTable != nullptr)
     {
-    meilleurTable->placerClients(tailleGroupe);
-    meilleurTable->setClientPrincipal(client);
-    client->setTable(meilleurTable);
+        meilleurTable->placerClients(tailleGroupe);
+        meilleurTable->setClientPrincipal(client);
+        client->setTable(meilleurTable);
         return true;
     }
     else
     {
-         return false;
+        return false; // si le client n'a pas pu etre placer
     }
 }
 
+//Livrer une commande a un client en utilisant la table de livraison. Retourne true si le client a bien ete livre sinon retourne false.
 bool Restaurant::livrerClient(Client* client, const vector<string>& commande)
 {
 	if (dynamic_cast<ClientPrestige*>(client))
     {
-		// TODO: Placer le client principal a la table fictive en utilisant la classe GestionnaireTables.
-        Table* livraison = tables_->getTable(ID_TABLE_LIVRAISON);
+		//Placer le client principal a la table fictive en utilisant la classe GestionnaireTables.
+        Table* tableLivraison = tables_->getTable(ID_TABLE_LIVRAISON);
         
-        livraison->setClientPrincipal(client);
+        tableLivraison->setClientPrincipal(client);
 		
-		// TODO: Placer client à la table fictive en utilisant la classe GestionnaireTables.
-        livraison->placerClients(1);
+		//Placer client à la table fictive en utilisant la classe GestionnaireTables.
+        tableLivraison->placerClients(1);
 		
 		// Placer la commande
 		for (unsigned int i = 0; i < commande.size(); i++)
@@ -177,12 +198,13 @@ bool Restaurant::livrerClient(Client* client, const vector<string>& commande)
 	}
 }
 
-double Restaurant::calculerReduction(Client* client, double montant, bool estLivraison)
+//Calcule la reduction a laquelle le client a droit
+double Restaurant::calculerReduction(Client* client, double montant, bool estLivraison) const
 {
     return client->getReduction(*this, montant, estLivraison);
 }
 
-
+//Retourne un nom selon le type de menu en parametre
 GestionnairePlats* Restaurant::getMenu(TypeMenu typeMenu) const
 {
 	switch (typeMenu) {
@@ -194,11 +216,13 @@ GestionnairePlats* Restaurant::getMenu(TypeMenu typeMenu) const
 	return nullptr;  // On ne devrait jamais se rendre � cette ligne.
 }
 
+//Retourne le menu correspondant au moment de la journee actuel
 GestionnairePlats* Restaurant::menuActuel() const
 {
 	return getMenu(momentJournee_);
 }
 
+//Initialise les frais de livraison des differentes zones en lisant un fichier texte
 void Restaurant::lireAdresses(const string& nomFichier)
 {
 	LectureFichierEnSections fichier{nomFichier};
@@ -211,11 +235,7 @@ void Restaurant::lireAdresses(const string& nomFichier)
 	}
 }
 
-double Restaurant::getChiffreAffaire()
-{
-	return chiffreAffaire_;
-}
-
+//Retourne un type string du type de menu (Matin, Midi, Soir)
 string Restaurant::getNomTypeMenu(TypeMenu typeMenu) const
 {
 	return string{nomsDesTypesDeMenu[static_cast<int>(typeMenu)]};
