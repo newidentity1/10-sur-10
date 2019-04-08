@@ -21,23 +21,29 @@
 class GestionnairePlats : public GestionnaireGenerique<pair<string, Plat*>, map<string, Plat*>> // TODO : Ajouter l'héritage 
 {
 public:
-	GestionnairePlats(const string& nomFichier, TypeMenu type); //TODO
+	//constructeurs
+    GestionnairePlats(const string& nomFichier, TypeMenu type); //TODO
 	GestionnairePlats(GestionnairePlats* gestionnaire); // TODO
 
+    //destructeurs
 	~GestionnairePlats(); // TODO
 
+    //getter
 	TypeMenu getType() const; // TODO
 
 	Plat* allouerPlat(Plat*) const; // TODO
 
+    //recherche
 	Plat* trouverPlatMoinsCher() const; // TODO
 	Plat* trouverPlatPlusCher() const; // TODO
-
 	Plat* trouverPlat(const string& nom) const; // TODO
 	vector<pair<string, Plat*>> getPlatsEntre(double borneInf, double borneSup); // TODO
-	void lirePlats(const string& nomFichier, TypeMenu type);
+	
+    //lecture fichier texte
+    void lirePlats(const string& nomFichier, TypeMenu type);
 	pair<string, Plat*> lirePlatDe(LectureFichierEnSections& fichier);
 
+    //affichage
 	void afficherPlats(ostream& os) const;
 
 private:

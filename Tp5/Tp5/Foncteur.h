@@ -4,6 +4,14 @@
 * Auteur: Moussa Traor� & Ryan Hardie & Wassim Khene
 *******************************************/
 
+/*
+* Titre : Foncteur.h - Travail Pratique #5
+* Date : 8 Avril 2019
+* Auteur : Yanis Toubal (1960266) et Estefan Vega Calcada (1934346)
+*/
+
+
+
 #pragma once
 
 #include <algorithm>

@@ -4,6 +4,13 @@
 * Auteur: Moussa Traor� & Ryan Hardie & Wassim Khene
 *******************************************/
 
+/*
+* Titre :Implémentation de GestionnairePlats.cpp - Travail Pratique #5
+* Date : 8 Avril 2019
+* Auteur : Yanis Toubal (1960266) et Estefan Vega Calcada (1934346)
+*/
+
+
 #include "GestionnairePlats.h"
 #include "LectureFichierEnSections.h"
 #include "PlatBio.h"
@@ -12,7 +19,7 @@
 
 using namespace std;
 
-//Rempli le conteneur (map<string,Plat*>) d'un type de menu avec des plats provenant de la section correspodante dans un fichier texte en utilisant lirePlatDe
+//Rempli le conteneur (map<string,Plat*>) d'un type de menu avec des plats provenant de la section correspodante dans un fichier texte
 void GestionnairePlats::lirePlats(const string& nomFichier, TypeMenu type)
 {
 	LectureFichierEnSections fichier{ nomFichier };
@@ -21,7 +28,7 @@ void GestionnairePlats::lirePlats(const string& nomFichier, TypeMenu type)
 		ajouter(lirePlatDe(fichier));
 }
 
-//Lit les plats dans le fichier texte et initialise dynamiquement le pointeur de base avec le constructeur du type representant le plat lu et retourne le pointeur de base.
+//Lit les plats dans le fichier texte et initialise dynamiquement le pointeur de base avec le constructeur du type representant le plat lu
 pair<string, Plat*> GestionnairePlats::lirePlatDe(LectureFichierEnSections& fichier)
 {
 	auto lectureLigne = fichier.lecteurDeLigne();
@@ -51,7 +58,7 @@ pair<string, Plat*> GestionnairePlats::lirePlatDe(LectureFichierEnSections& fich
 	return pair<string, Plat*>(plat->getNom(), plat);
 }
 
-//Constructeur qui remplit le conteneur en utilisant lirePlats
+//Constructeur qui remplit le conteneur
 GestionnairePlats::GestionnairePlats(const string& nomFichier, TypeMenu type) : type_(type)
 {
     lirePlats(nomFichier, type);

@@ -36,19 +36,16 @@ public:
 	~Restaurant();
 
 	// Setters.
-
 	void setMoment(TypeMenu moment);
 	void setNom(string_view nom); 
     void setChiffreAffaire( double chiffre);
-	// Getters.
-
+	
+    // Getters.
 	string getNom() const;
 	TypeMenu getMoment() const;
     double getChiffreAffaire() const;
 	GestionnaireTables* getTables() const; // TODO : À implémenter
-	
     GestionnairePlats* getMenu(TypeMenu typeMenu) const; // TODO: retourner un GestionnairePlats* a la place
-	
     double getFraisLivraison(ZoneHabitation zone) const;
 	string getNomTypeMenu(TypeMenu typeMenu) const;
 
@@ -57,7 +54,9 @@ public:
 	void libererTable(int id);
 
     void commanderPlat(const string&  nom, int idTable);
-	bool operator <(const Restaurant& restau) const ;
+	
+    //surcharge d'operateur
+    bool operator <(const Restaurant& restau) const ;
 	Restaurant& operator=(const Restaurant& autre) = delete;  //? Le programme ne fait jamais de copie de restaurant, donc cette fonction n'�tait pas test�e et par cons�quent probablement �rron�e.
 	
 	bool placerClients(Client* client);
@@ -78,7 +77,6 @@ private:
     GestionnairePlats* menuMatin_;
     GestionnairePlats* menuMidi_;
     GestionnairePlats* menuSoir_;
-    
     
 	// Liste des tables.
     GestionnaireTables* tables_;

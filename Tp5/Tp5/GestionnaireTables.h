@@ -17,10 +17,19 @@ using namespace std;
 class GestionnaireTables : public GestionnaireGenerique<Table*, set<Table*>> // TODO : Ajouter l'héritage
 {
 public:
+    //constructeur
 	GestionnaireTables() = default;
-	Table* getTable(int id) const; // TODO
+	
+    //destructeur
+    ~GestionnaireTables();
+    
+    //recherche
+    Table* getTable(int id) const; // TODO
 	Table* getMeilleureTable(int tailleGroupe) const; // TODO
-	void lireTables(const string& nomFichier);
-    ~GestionnaireTables(); 
+	
+    //lire fichier texte
+    void lireTables(const string& nomFichier);
+    
+    //affichage
 	void afficherTables(ostream& os) const; // TODO
 };
